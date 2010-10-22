@@ -1,0 +1,43 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" type="text/css" href="AGiliTy.css">
+ </head>
+ <body>
+<h1>Debugging Options</h1>
+With AGILDEBUG you can access various debugging commands. You can move
+objects around; change the values of flags, variables and counters; list
+objects in the game; examine and edit objects; and turn metacommand
+tracing on or off.
+<p>
+(Note: You can change almost all of the fields associated with an object
+using the View/Edit Object option; be warned that many of them are not
+SAVEd or RESTOREd since they can't be changed during normal play. If you
+change one of these and then RESTORE or UNDO, it will stay changed.
+Conversely, if you make a change, save, quit, and restore, the changed
+value will not be preserved. The fields having this behavior are
+marked.)
+<p>
+When metacommand tracing is on, every metacommand that is run will be
+displayed. You can turn off tracing of ANY metacommands and tracing of
+metacommands during disambiguation (the latter is off by default).
+<p>
+In addition, AGiliTy has a test mode which automatically reads a log
+file from <gamename>.LOG (or equivalent) and writes a script to
+<gamename>.SCR. In this mode, the random number generator is forced to
+be non-random, allowing for automated testing of games.
+<p>
+To use this, you create a LOG file (either by hand, by using the '-c'
+option, or by using LOG - note that this log file needs to include
+everything from the very beginning, including the key hit at the end of
+the title screen, so if using the LOG command you'll need to add a line
+or two at the beginning.)
+<p>
+Run AGiliTy in test mode once to get the script. Copy the script to some
+other file. Then, whenever you make a change to your game file, rerun
+AGiliTy and compare the new script with the old one. (There are programs
+that will do this automatically and just print out the lines that have
+changed.)
+ </body>
+</html>
+

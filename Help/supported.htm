@@ -1,0 +1,38 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" type="text/css" href="AGiliTy.css">
+ </head>
+ <body>
+<h1>AGT Versions Supported</h1>
+AGiliTy understands the following versions of AGT (which includes every AGT game at ftp.ifarchive.org that I know of):
+<ul>
+<li>1.0
+<li>1.18
+<li>The early "Classic AGT": e.g. 1.19, 1.2, 1.21
+<li>"Classic AGT", both big and small: e.g. 1.3, 1.32, 1.35, 1.5, 1.7
+<li>The "Even Bigger 1.32" used by <b>Cosmoserve</b>
+<li>The "Chemically Altered 1.32" used by <b>Shades of Gray</b>
+<li>Menichelli's 1.82 [untested] and 1.83
+<li>Both known "proto-Master's Edition" 1.5 variants
+<li>The proto-Master's Edition 1.6 variant used by <b>Pork</b>
+<li>Both Master's Edition 1.0 variants
+<li>The Master's Edition 1.5/1.51, 1.55, and 1.56/1.6/1.7
+</ul>
+<b>The Pyramids of Mars</b> and <b>Cliff Diver</b> require configuration options to be set; they use variant interpreters that are
+supported but can't be detected by the interpreter. In particular, <b>Pyramids</b> needs the ALT_ANY option and <b>Cliff Diver</b>
+requires the IRUN option.
+<p>
+<b>Klaustrophobia</b> is now supported. Use AGiliTy to play each of the chapters as usual. To switch between chapters, just SAVE at
+the end of one chapter and RESTORE at the beginning of the next (the game will tell you when to switch chapters; however, use SAVE
+instead of DONE1 or DONE2). This is still experimental and so I'd appreciate any feedback on how well it works (or doesn't work,
+as the case may be). 
+<p>
+Unlike the MS-DOS programs that <b>Klaustrophobia</b> originally used for this, AGiliTy doesn't check that you've actually reached
+the end of the previous chapter; be warned that if you switch chapters before the game tells you to, things may break.
+<p>
+There is also no way for AGiliTy to support the intermission or endgame text from the original game: these are all printed out by
+DOS programs rather than by the AGT interpreter.
+ </body>
+</html>
+

@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AGiliTy", "AGiliTy.vcproj", "{28794BD7-D20C-4E63-BD1F-35D5EE14ED5C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Agt2Agx", "Agt2Agx.vcproj", "{BB7E681F-6544-452B-8F74-E38219565FE4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AgtOut", "AgtOut.vcproj", "{6D166C42-0FFD-476F-A231-67FCB3DDF514}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{28794BD7-D20C-4E63-BD1F-35D5EE14ED5C}.Debug.ActiveCfg = Debug|Win32
+		{28794BD7-D20C-4E63-BD1F-35D5EE14ED5C}.Debug.Build.0 = Debug|Win32
+		{28794BD7-D20C-4E63-BD1F-35D5EE14ED5C}.Release.ActiveCfg = Release|Win32
+		{28794BD7-D20C-4E63-BD1F-35D5EE14ED5C}.Release.Build.0 = Release|Win32
+		{BB7E681F-6544-452B-8F74-E38219565FE4}.Debug.ActiveCfg = Debug|Win32
+		{BB7E681F-6544-452B-8F74-E38219565FE4}.Debug.Build.0 = Debug|Win32
+		{BB7E681F-6544-452B-8F74-E38219565FE4}.Release.ActiveCfg = Release|Win32
+		{BB7E681F-6544-452B-8F74-E38219565FE4}.Release.Build.0 = Release|Win32
+		{6D166C42-0FFD-476F-A231-67FCB3DDF514}.Debug.ActiveCfg = Debug|Win32
+		{6D166C42-0FFD-476F-A231-67FCB3DDF514}.Debug.Build.0 = Debug|Win32
+		{6D166C42-0FFD-476F-A231-67FCB3DDF514}.Release.ActiveCfg = Release|Win32
+		{6D166C42-0FFD-476F-A231-67FCB3DDF514}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

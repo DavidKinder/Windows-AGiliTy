@@ -1,0 +1,372 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\AGiliTy.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AGiliTy.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDB_TOOLBAR32           BITMAP                  "res\\Toolbar32.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_RESTORE_GAME
+    BUTTON      ID_FILE_SAVE_GAME
+    BUTTON      ID_VIEW_FONT
+    BUTTON      ID_VIEW_OPTIONS
+    BUTTON      ID_HELP_HELPTOPICS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open New Game...\tCtrl+O",   ID_FILE_OPEN
+        MENUITEM "Restore Saved Game...",       ID_FILE_RESTORE_GAME
+        MENUITEM "Save Current Game...",        ID_FILE_SAVE_GAME
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Font...\tCtrl+F",            ID_VIEW_FONT
+        MENUITEM "&Options...\tCtrl+T",         ID_VIEW_OPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "AGiliTy &Help\tF1",           ID_HELP_HELPTOPICS
+        MENUITEM "&About AGiliTy",              ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "F",            ID_VIEW_FONT,           VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_VIEW_OPTIONS,        VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_HELP_HELPTOPICS,     VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 183, 104
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "About AGiliTy"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "AGiliTy - The (Mostly) Universal AGT Interpreter",
+                    IDC_STATIC,14,13,162,9,SS_NOPREFIX
+    DEFPUSHBUTTON   "OK",IDOK,112,85,64,13,WS_GROUP
+    LTEXT           "Windows version by David Kinder",IDC_STATIC,14,43,112,8,
+                    SS_NOPREFIX
+    GROUPBOX        "About",IDC_ABOUT_CAPTION,7,2,169,78
+    LTEXT           "AGiliTy is released under the terms of the GNU General Public License.",
+                    IDC_STATIC,14,58,150,16
+    LTEXT           "Version 1.1.1",IDC_STATIC,14,22,51,8
+    LTEXT           "Copyright 1996-1999,2001 by Robert Masenten",IDC_STATIC,
+                    14,31,159,8
+END
+
+IDD_OPTIONS DIALOGEX 0, 0, 221, 103
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CONTEXTHELP | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,164,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,164,25,50,14
+    GROUPBOX        "Window",IDC_STATIC_WINDOW,7,3,151,29
+    CONTROL         "&Fix window at 80 columns",IDC_SIZE_WINDOW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,34,16,96,8
+    GROUPBOX        "Colour",IDC_STATIC_COLOUR,7,35,151,61
+    CONTROL         "&Enable colours",IDC_COLOURS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,61,45,63,9
+    RTEXT           "&Text",IDCS_TEXT,26,61,17,8
+    CONTROL         "",IDC_TEXT,"Button",WS_TABSTOP,47,59,27,
+                    13
+    RTEXT           "&Background",IDCS_BACK,78,61,40,8
+    CONTROL         "",IDC_BACK,"Button",WS_TABSTOP,122,59,27,
+                    13
+    RTEXT           "E&mphasis",IDCS_EMPHASIS,12,77,32,8
+    CONTROL         "",IDC_EMPHASIS,"Button",WS_TABSTOP,47,75,
+                    27,13
+    RTEXT           "&Status bar",IDCS_STATUS,82,77,36,8
+    CONTROL         "",IDC_STATUS,"Button",WS_TABSTOP,122,75,
+                    27,13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,1,0
+ PRODUCTVERSION 1,1,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "AGiliTy"
+            VALUE "FileVersion", "1, 1, 1, 0"
+            VALUE "InternalName", "AGiliTy"
+            VALUE "LegalCopyright", "Copyright 1996-1999,2001 by Robert Masenten, David Kinder"
+            VALUE "OriginalFilename", "AGiliTy.exe"
+            VALUE "ProductName", "AGiliTy AGT Interpreter"
+            VALUE "ProductVersion", "1, 1, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 214
+        BOTTOMMARGIN, 96
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+IDR_MANIFEST            RT_MANIFEST             "res\\AGiliTy.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "AGiliTy AGT Interpreter\n\nAGX\n\n.agx\nAGX.Game\nAGiliTy Game"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "AGiliTy"
+    AFX_IDS_IDLEMESSAGE     "Windows AGiliTy"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_UNTITLED        "Untitled"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_OPEN            "Open a new AGT game\nOpen"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information\nAbout"
+    ID_APP_EXIT             "Quit the interpreter\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this game"
+    ID_FILE_MRU_FILE2       "Open this game"
+    ID_FILE_MRU_FILE3       "Open this game"
+    ID_FILE_MRU_FILE4       "Open this game"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the interpreter"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_OPTIONS         "Open the options dialog\nOptions"
+    ID_VIEW_FONT            "Change the font\nFont"
+    ID_FILE_SAVE_GAME       "Save the current game\nSave"
+    ID_FILE_RESTORE_GAME    "Restore a previously saved game\nRestore"
+    ID_HELP_HELPTOPICS      "Display the help file\nHelp"
+END
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\AGiliTy.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

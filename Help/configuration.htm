@@ -1,0 +1,187 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" type="text/css" href="AGiliTy.css">
+ </head>
+ <body>
+<h1>Configuration Files</h1>
+The interpreter gets configuration information from as many as three places: the global configuration file, the game-specific
+configuration file (usually with an extension '.cfg'), and, in the case of AGX-format games, the game file itself. 
+<p>
+Options in the game-specific file override options specified from the other two sources; options in the AGX file override those
+in the global file.
+<p>
+The following configuration options are supported on all platforms. Other options may be supported on your particular system;
+see appropriate platform-specific documentation for information.
+<p>
+Each option should be on a separate line in the configuration file. Lines starting with '#' will be treated as comments and
+ignored. Options can be negated by prefixing them with 'NO_' so that, for example, DEBUG would become NO_DEBUG.
+<p>
+General options:
+<table border="0" cellpadding="2" cellspacing="0">
+  <tr>
+    <td nowrap width="180" valign=top>VERBOSE</td>
+    <td>Start the game in VERBOSE mode</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>DEBUG</td>
+    <td>Allow the use of AGILDEBUG for pre-Master's games (For Master's Edition games, this decision is based on the DEBUG flag
+in the game file itself)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>DEFAULT_ERRORS</td>
+    <td>Cause AGiliTy to use its own internal defaults for standard error messages even if the game file defines its own.
+(Recommended for most Master's Edition games.)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>PATH</td>
+    <td>Gives a space-separated search path for AGT games. [Not supported on all platforms.]</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>TONE</td>
+    <td>Enables the *tone* action token, which allows games to make annoying beeps on some platforms.  The only game I might
+recommend enabling this for is <b>CosmoServe</b> which has some interesting sound effects.
+Not all platforms support this command.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>INPUT_BOLD</td>
+    <td>Makes the input line bold. (This doesn't work on all platforms)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>IBM_CHAR</td>
+    <td>Try to use the IBM character set; don't translate them. If your platform doesn't support the IBM character set, this is
+likely to produce garbage.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>NO_ERROR</td>
+    <td>Suppress GAME ERROR messages during play. Some AGT games are not very well written and contain bad metacommands,
+out-of-range tokens, or other problems; this option will suppress the messages reporting these sorts of problems.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>SMART_DISAMBIG</td>
+    <td>This turns on smart disambiguation. This works better with some games than others.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>EXPAND_ALL</td>
+    <td>This turns on ALL and ALL EXCEPT expansion in the parser (by default, expanding them is the responsibility of the
+individual verb execution routines); see remarks on SMART_DISAMBIG: both of these options use the same engine and so they are
+likely to work or fail together. If you're using this, you'll probably also want to set FIX_MULTINOUN.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>IGNORE_SIZE</td>
+    <td>Ignore weight and size limits on how much the player can carry. (There remain limits on the size and weight of any
+individual object.)</td>
+  </tr>
+</table>
+<br>
+Game specific options:<br>
+(Many of these are more useful to game authors than game players.)
+<table border="0" cellpadding="2" cellspacing="0">
+  <tr>
+    <td nowrap width="180" valign=top>PROPER_CREATURE</td>
+    <td>Treat all creature names as proper nouns. (In particular, this will cause them to be capitalized and to not have "the"
+appear in front of them.)  Use of DEFAULT_ERRORS is recommended with this option.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>ROOMTITLE</td>
+    <td>Print the room title in bold before the room description in pre-Master's games. (Master's Edition games do this
+automatically)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>IRUN</td>
+    <td>Print error messages in first person. This should be set for <b>Cliff Diver</b>.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>NO_BLOCK_HOSTILE</td>
+    <td>Allow the player to leave a room containing a hostile creature if they go back the way they came.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>NO_GET_HOSTILE</td>
+    <td>Prevents the player from picking up objects in a room containing a hostile creature. (Intended to be used with
+NO_BLOCK_HOSTILE)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>NO_OBJECT_NOTES</td>
+    <td>Turns off notes after object description, such as '[providing light]'.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>CONST_TIME</td>
+    <td>Increment time at a constant rate instead of randomly.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>SLASH_BOLD</td>
+    <td>If set the slash character toggles bold on and off. (This should be set automatically for 1.8x games,
+but you may still need to set it explicitly for version 1.82)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>PRONOUN_SUBS</td>
+    <td>Do $you$-style substitutions even in  game-author defined messages.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>ALT_ANY</td>
+    <td>This scans the ANY metacommands *with* the <verb> metacommands rather than before them. Should be set for
+<b>Pyramids of Mars</b> and not for any other games I know of.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>CHECK_GRAMMAR</td>
+    <td>Print out error messages if the player enters a verb with too many objects. (For example, "N KEY").</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>FORCE_LOAD</td>
+    <td>Force AGX game to load even if interpreter isn't of the right version. Don't use this unless you know what
+you're doing: Magx doesn't assign minimum version numbers without reason.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>PURE_AFTER</td>
+    <td>Causes LOOK and other end-of-turn actions to take place after AFTER commands. (This is on by default for
+Master's Edition games.)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>FIXED_FONT</td>
+    <td>Force system to use a fixed-pitch font.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>NO_FIXED_FONT</td>
+    <td>Allow the system to use proportional fonts.</td>
+  </tr>
+</table>
+<br>
+Technical options: These are fine tuning.<br>
+<table border="0" cellpadding="2" cellspacing="0">
+  <tr>
+    <td nowrap width="180" valign=top>FIX_METAVERB</td>
+    <td>Don't run ANY metacommands when executing a metaverb.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>FIX_MULTINOUN</td>
+    <td>Only advance one turn when manipulating multiple nouns, rather than a turn for each noun.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>PURE_ANSWER</td>
+    <td>Require AND-connected answers to be in the right order. (The Master's Edition documentation claims
+order doesn't matter, but with the actual interpreters it does)</td>
+  </tr>
+</table>
+<br>
+Parse Options: These are all pretty technical.<br>
+<table border="0" cellpadding="2" cellspacing="0">
+  <tr>
+    <td nowrap width="180" valign=top>PURE_DUMMY</td>
+    <td>Allow dummy verbs to be run by typing "dummy_verb3"</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>PURE_SUBNAME</td>
+    <td>Allow subroutines to be run by typing "subroutine3"</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>PURE_SYNONYM</td>
+    <td>Treat synonyms exactly as nouns.</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>ADJ_NOUN</td>
+    <td>Don't pick noun matches over adjective-only matches.</td>
+  </tr>
+</table>
+ </body>
+</html>
+

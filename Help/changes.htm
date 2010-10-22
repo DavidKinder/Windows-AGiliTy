@@ -1,0 +1,651 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" type="text/css" href="AGiliTy.css">
+ </head>
+ <body>
+<h1>List of Changes since Version 0.1</h1>
+Changes for Version 1.1.1
+<ul>
+<li>Fixed output function: paragraph filling corrected; made filling
+less agressive for Magx games; fixed print_statline to work with a
+screen width greater than 100.
+<li>Object loops more carefully trapped, avoiding infinite loops. Object
+loop error no longer printed out.
+<li>IsWorn and IsCarried no longer look inside closed objects. [Al]
+<li>Fixed handling of AGT_DEBUG_CMD by agt_newgame(). [Kinder]
+<li>*nix port changes: MORE handling fixed; os_linux.c renamed os_termcap.c;
+os_curses.c is now the main *nix interface; os_curses version of fix_loc()
+fixed; os_curses batch support fixed.
+<li>32-Bit DOS port: BIOS option now works.
+<li>Fixed formatting in debugger object editor.
+</ul>
+Changes for Version 1.1
+<ul>
+<li>The interpreter will now work correctly when passed an AGT file
+name with an extension (instead of trying to read it as an AGX file).
+<li>Overhauled STANDARD message handling: ATTACK messages will now get
+the $noun$ and $object$ in the right order; parser messages now
+replaceable; $noun$-type substitutions are prevented in cases where
+they are not meaningful; added message fallback system to stdmsg();
+added '-s' command line option for debugging standard messages; added
+$the_name$, $name_pro$, $name_indir$; fixed capitalization of proper
+$name$s; $/# substitution routines simplified.
+<li>Debugger now supports objprops, objflags, and PROPER.
+<li>New metacommand tokens: CanGo and MoveInDirection.
+<li>Added support for printing objprops and objflags.
+<li>Added support for itemized objprops/variables/objflags/flags.
+<li>Added support for explicit objects to redirection and command
+headers.
+<li>Null NOUN/OBJECT/ACTOR args to conditional tokens will no longer
+generate GAME ERROR messages.
+<li>Added $ and # expansion to shortdescs of nouns and creatures.
+<li>Misc bug fixes:initialization of seen and proper for original AGT games;
+types in GAME ERROR messages; objswap in exec_verb(); parse_noun will
+no longer look for multiple nouns when parsing the actor; possible 
+buffer overrun in wordcode_match; added second line of vb== conditions
+to verify_scope.
+<li>Overhauled handling of dobj_rec, iobj_rec, actor_rec: they
+are now copied and freed by runverbs() and objcheck_cycle();
+added copy_parserec(), free_all_parserec();
+<li>Fixed e-mail address and Jay's URL.
+</ul>
+Changes for Version 1.0
+<ul>
+<li>Added support for proper names of creatures and nouns, indicated
+by the object in question having the PROPER flag set.  Proper names
+are printed capitalized and without the definite article ("Fred"
+instead of "the fred"). Note that this change only affects built-in
+messages, and game messages that use the new $the_n$, $the_o$, and
+$the_c$ substitutions.
+<li>As part of this change, added the PROPER_CREATURE configuration
+option which will make *all* creature names proper.
+<li>For pre-Magx games, built-in verb synonyms now take precedence
+over author-defined ones. For example, N will now be interpretered as
+NORTH, even in games that try to redefine it as meaning "NO".  (Games
+created using VERSION MAGX will still honor the author's intent.)
+<li>PLAY WITH is longer automatically converted to PLAY. [Metcalf]
+<li>TURN ON can now trigger specials [Metcalf]; in general, the
+handling of &lt;verb&gt; &lt;preposition&gt; &lt;noun&gt; constructions for pre-Magx
+games has been fixed.
+<li>Items contained in worn objects are now also considered to be worn.
+<li>Short description used instead of adjective-noun for nested
+inventory items. [Metcalf]
+<li>Fixed problem with empty filenames in get_user_file.
+<li>$ strings no longer forced to lower case before substitution.  
+<li>32-bit DOS version now supports graphics and fonts.
+<li>'strptr' changed to 'ss_end', to conform to ANSI C namespace
+requirements.
+</ul>
+Changes for Version 0.9.1
+<ul>
+<li>Fixed reading of Master's Edition games, which was broken by the
+roomflag changes in 0.9.
+</ul>
+Changes for Version 0.9
+<ul>
+<li>ALL now ignores the contents of objects that are already selected.
+<li>Fixed RoomFlag handling for more than 16 roomflags; reduced
+the official limit on number of roomflags to 31. [Mlinar]
+<li>KillPlayer now ends metacommand execution. [Jay]
+<li>DescribeThing &lt;room&gt; now works correctly. [Tarkin]
+<li>Disambiguation of GET fixed to deal with containers. [Turpin]
+<li>Fixed conflict between autoexec verbs and AFTER. [Turpin]
+<li>Fixed reading in of answers from large AGX files. [Myrow]
+<li>Typographical fixes: pronoun references in v_attack() error messages
+and the spelling of resurrection.
+<li>Dissassember changes: top-of-stack and indirect references fixed;
+newlines after OnFailGoto corrected; debug settings in AGTOUT fixed.
+</ul>
+Changes for Version 0.8.9
+<ul>
+<li>DOS binary recompiled with correct source files.
+<li>Fixed AGX incompatibility problem with pre-0.8.8 interpreters.
+Standard AGX version raised to 2.
+<li>Fixed large save-file support:  DOS version can now handle save
+files up to 64K and there is a (theoretical) upper limit of 2GB for
+appropriate platforms.
+<li>Fixed reading of AGX files with no descriptions.
+</ul>
+Changes for Version 0.8.8
+<ul>
+<li>Added REPLAY FAST command and fast_replay flag.
+<li>Room descriptions are now printed out after ressurection. [Jay]
+<li>The debugger now splits noun attributes across three columns.
+<li>Added support for user defined object flags and properties, including
+new metacommand tokens ObjFlagOn, ObjFlagOff, TurnObjFlagOn, TurnObjFlagOff,
+ToggleObjFlag, PushObjProp, and PopObjProp.  
+<li>Action tokens that only affect the stack no longer force then end of
+an OR block. (This allows the stack to be used for computations in such a 
+block.)
+<li>Changed names of IsSet/Set/Clear to AttrOn/TurnAttrOn/TurnAttrOff.
+<li>Two-argument metacommand tokens now work correctly with NOUN and OBJECT.
+<li>Two-argument metacommands with a double top-of-stack reference now
+pops the second argument first.
+<li>Fixed handling of NOUNInRoom, DescribeThing, and EndDisambig tokens.
+<li>Fixed 16-bit overflow bug in loadgame(). [Tarkin]
+<li>DOS DA6 buffering adjusted to fit in 32K.
+</ul>
+Changes for Version 0.8.7
+<ul>
+<li>COLOURS option (as synonym for COLORS) added.
+<li>Added 50_LINE and BLOCK_CURSOR configuration options to DOS port.
+<li>Most command line options are now case-insensitive
+<li>Added support for $FLAG[obj]$, $ON[obj]$, $OPEN[obj]$, $LOCKED[obj]$ 
+[Patch contributed by Mitch Mlinar].
+<li>New token: HasSeen.  (Warning: this is untested.)
+<li>Pure-stack operations are no longer treated as action tokens for 
+disambiguation purposes.
+<li>The game stack is now cleared before each major metacommand scan
+although not before DoSubroutine or RedirectTo initiated scans.
+<li>Delay no longer divides by two.
+<li>Corrected handling of RoomNeedsLight.
+<li>Bugs fixed: direct address with multiple actors of same name,
+"start==-1" problem in agtread.c, objname handling of missing
+adjectives, object.c problems with creatureless games, agtout display
+of non-printable owner-ids, BeforeCommand/AfterCommand handling during
+disambiguation, premature closing of the description file in agt2agx
+(giving a "Bad file number" error under DOS), DOS memory allocation
+error ("Failed Assertion: size>=0" when loading games with 500 or more
+nouns), and a couple of typos in game messages.
+<li>Fixed PUSH error message handling and compute_addr diagnostics
+[Patch submitted by Paul Mikell].
+<li>Addition of quitflag tests in a few places [Patch contributed by
+Mitch Mlinar].
+</ul>
+Changes for Version 0.8.6
+<ul>
+<li>Added NAVARROW configuration option to Linux and DOS version,
+which allows the arrow keys to be used for navigation instead of editing.  
+<li>Added PURE_AFTER configuration option. (This affects whether LOOKs
+occur before or after AFTER commands.)
+<li>OncePerTurn now triggers on _last_ object in a list if called from
+AFTER or COMMAND AFTER block. Furthermore, AfterCommand is now true in
+a COMMAND AFTER block.
+<li>Bad operand errors will no longer stop metacommand execution.
+<li>Added version detection support, including the FORCE_LOAD
+configuration option to override it.
+<li>Added string tokens: CompareStrings, StringBefore, StringAfter,
+StringIsAnswer,, CopyString, UpcaseString, DowncaseString.
+<li>Added XRedirect metacommand token to allow multiple RedirecTos in
+an AGATE command structure.
+<li>Added fixed font formatting code as well as FIXED_FONT
+configuration option.
+<li>Filename handling has been completely overhauled. All file I/O now
+goes through the new file "filename.c".  All FILE* references have
+been replace by "genfile" and all uses of the game name have been
+replaced by 'file context' elements. 
+<li>Miscellaneous fixes: bold text in the DOS port should now be the
+right color; use of 'class' and 'new' was eliminated from the source
+code to avoid conflict with C++; eliminated error message when title
+file not found; disambiguation now correctly accounts for two-cycle
+execution; fixed bug in rsort() so it can deal with multiple
+RedirectTo headers; tweaked concdup(); started adding hint data
+structures; handling of user strings fixed.
+</ul>
+Changes for Version 0.8.5
+<ul>
+<li>Added DEFAULT_ERRORS configuration option.
+<li>TALK to a nonexistant object goes to STD 179 instead of 184. [Y23/24]
+<li>Platform dependent information has been broken off into a seperate
+include file, config.h, which is #included in agility.h.
+<li>Changed source code filenames to improve readability:
+      agtread.h-->agility.h;  uagt.h-->interp.h;		
+      agtdata.c-->gamedata.c; agtdbg.c-->disassemble.c;
+      agttest.c-->agtout.c; rmem.c-->util.c
+<li>Converted bool to rbool to avoid conflicts with other libraries and
+systems.
+<li>Documentation of agt_textcolor() fixed.
+<li>Fixed 1.83 command sequence and moved Master's Edition AFTER commands
+after 1.83 after-command group.
+<li>Added TWO_CYCLE option to turn on the 1.83-style command sequence.
+<li>Added flagnum and isglobal to nouns and creatures. [YS2]
+<li>Bugs fixed: unmovable objects and DROP [Y22]; segfault if D$$ file
+not present; buffer sizing in buffopen() and buffreopen; DOS titlebox
+colors. 
+<li>Fixed $turn$ message.
+<li>Added range checking to the debugger.
+</ul>
+Changes for Version 0.8.4
+<ul>
+<li>Corrected AGT 1.5/P to AGT 1.6.
+<li>Added BIOS option to DOS port.
+<li>Added EndDisambig token.
+<li>Made UNMOVABLE nouns undropable/unremovable. [YS1]
+<li>Fixed error messages for THROW, TALK, and REMOVE [Y19,20,21]
+<li>Bugs fixed: actor metacommands not scanned correctly;  spurious
+"Preposition needs object" message [Y18]; TURN ON/OFF not parsed
+correctly; ToggleMovable broken; yank segfault under Linux.
+<li>Eliminated spurious "preposition needs object" message. [Y18]
+<li>DOS port: Turned off common subexpression elimination in compiler
+to fix PORK "climb tree" bug.
+</ul>
+Changes for Version 0.8.3
+<ul>
+<li>Added CHECK_GRAMMAR configuration option.
+<li>DOS output now goes through BIOS calls.
+<li>File routines now chop AGX, D$$, and DA1 extensions off before adding 
+another extension.
+<li>SHOW without an object now converted to SHOW EXITS.  [Y12]
+<li>LOOK &lt;object&gt; converted into EXAMINE (unless the game has a
+metacommand overriding LOOK &lt;object>).  [Y16] 
+<li>Global noun handling fixed: EXAMINING one now gives a sensible
+message and $adjective$ handling has been fixed to deal with them. [Y10&11]
+<li>SHOOT will now treat a lone object as the target if it is not
+shootable.  [Y6] 
+<li>Eliminated internal error caused by "TALK" with no object. [Y7]
+<li>Trace output now prints out metacommand adjective match fields.
+<li>Redirection turns off checking for excess objects under certain
+conditions. [Y4/17]
+<li>The tokensier uses context is used to determine whether '.' should
+be treated as a letter or as puncutation.
+<li>Added support for &lt;none&gt; fields in metacommand header distinct
+from ANY fields. (Untested)
+<li>Fixed restoring of noun.position.
+</ul>
+Changes for Version 0.8.2
+<ul>
+<li>Fixed Room debugging fields
+<li>Added $you're$ and rewrote some of the error messages to take
+advantage of it.
+<li>Fixed enter and exit messages.
+<li>Tweaked display of contents of invisible items.
+<li>Support for new tokens: Equal, GT, LT, GE, LE, Goto, OnFailGoto.
+<li>Parser now recognizes roomflag nouns even when they aren't present.
+<li>Fixed verb redirection bug.
+<li>Rewrote run_metacommand.
+<li>Rewrote visibility checking routines to handle roomflags and other
+virtual objects more carefully.
+<li>Fixed bug in check_obj.
+</ul>
+Changes for Version 0.8.1
+<ul>
+<li>Error message for unparsable noun has been made clearer.
+<li>GO &lt;direction&gt; will not be condensed to &lt;direction&gt; if GO has been
+overridden. 	 
+<li>LOOK now generates &lt;look&gt; action even after DoneWithTurn.
+<li>Fixed direction names in ChangePassageway debugging output.
+<li>Command offsets now printed for non-ME AGX files.
+<li>Spaces now stripped from end of pre-Magx description lines
+<li>Added 'unused' field to rooms,nouns,creatures and to agtread.c
+<li>Added unused checking to score computation and agttest.c
+<li>Whitespace recognition in AGT files changed to be
+platform-independent.
+<li>Fixed read_filerec so it won't read past end-of-block.
+<li>rrealloc explicitly returns NULL (and frees the original pointer) 
+if passed a size of 0.
+</ul>
+Changes for Version 0.8
+<ul>
+<li>The interpreter can now recognize AGX files that don't end in '.agx'.
+<li>Added NO_ERROR and IGNORE_SIZE options for the CFG file.
+<li>The parser accepts ANY, EITHER, BOTH, and ALL as responses to
+disambiguation queries.
+<li>The save file format has changed again :-(.
+<li>Tweaked title-printing routines to use less space when the title
+is large.
+<li>Agtout now doesn't print messages for PrintRandomMessage except
+by request (and then it prints the whole range, not just the actual two 
+arguments).
+<li>AGTout doesn't print out standard messages unless -m flag is set.
+<li>Added -o option to agtout.
+<li>Debugging screens now mark fields that aren't saved/restored.
+<li>Token tables: added support for new ME/1.0 variant, fixed the 1.83
+token translation table, and unified 1.83 and 1.83a (using 1.83a table).
+<li>Added PATH option to Linux and DOS ports.
+<li>Illustrations are now listed inroom description.
+<li>Linux and DOS ports now support graphics, fonts and function keys.
+<li>For Unix, DOS, and similar systems, RESTORE will list existing
+save files.
+<li>Linux allows script and log output to be piped.
+<li>Added ^P,^N,^B,^F to Linux/DOS line editor
+<li>Test mode (option -t) for automated testing of games has been added,
+resulting in a new variable test_mode and more careful control of
+calls to agt_readkey().
+<li>Added infrastructure for PATH support (gamepath).
+<li>Moved gamename argument from init_interface to start_interface.
+<li>Added set_file_context() and related code.
+<li>DESCR_BUFFSIZE now controls buffering of description text for AGX
+format games; AGT games are partially supported.
+<li>New language features: direction-triggered verbs, game-defined
+multiple-word verbs, game-defined prepositions, and classes.
+<li>New tokens, for manipulating CLASS and the expression stack,
+accessing arbitrary properties and attributes, and checking player
+input for numbers.
+<li>DoSubroutine now uses an explicit stack.
+<li>POINTS added to save file.
+<li>SPECIAL descriptions now correctly printed by agtout.
+<li>"Scanning..." messages now use verb synonym for dummy verbs.
+<li>The debugger adds newlines after some metacommand tokens (those
+that print out messages).
+<li>Changed ressurection smoke to dark green :-).
+<li>Objects whose contents are all INVISIBLE won't print "Which contains:"
+<li>Fixed $adjective$ and $noun$ substitution to avoid double-words
+(e.g. 'silver silver').
+<li>Overhaul of built in verbs: can no longer lock open objects;
+v_throw() has been rewritten to handle liquids correctly; the error
+messages map more closely to the original AGT messages, including two
+different messages for darkness; weight and size have been completely
+rewritten to be bug-compatible with the different AGT versions.
+<li>Handling of DOOR in parser and built-in verbs has been reworked;
+it now has a lower disambig priority than any real object it the game
+and Magx games no longer recognize it at all.
+<li>Metacommand scanning is now bug-compatible with the original
+interpreters; metacommands are no longer sorted at all.
+<li>$object$, $noun$ objects now work with $name$ as well in redirect.
+<li>Redirection no longer changes the *real* actor. (unless a $-form
+is used, of course).
+<li>Eliminated ignore_grammer
+<li>$verb$ will now refer to last real verb rather than "g".
+<li>Changed verb_id() so built-in synonyms are checked before room
+synonyms (although only if there is no author-defined synonym).
+<li>noun[].pict, noun[].related_names, and creature[].pict are all now
+initialized for pre-Master's Edition games.
+<li>Bugs fixed: NOUN/OBJECT arguments with 2-arg opcodes work; COLORS
+check at beginning of title now case-insensitive; AGX titles now work
+with slash_bold; Statusmode 4 does what it's supposed to; eliminated
+format_string() 200-character limit; counters now printed out
+correctly; TurnOnCounter now sets counter to 1; capitalization of
+$...$ forms with '_' fixed; FailMessage works corerctly.
+<li>EVERYBODY now has limited support.
+<li>Tweaked DOS color support.
+<li>DOS doesn't create status line window until after the title is printed.
+<li>Code reorganizations: removed FAR; moved some global variable
+intialization to agtdata.c; converted \E to \033 in os_linux.c to
+silence warning messages about non-ANSI escape sequences; reorganized
+os_linux.c for better readability.
+</ul>
+Changes for Version 0.7.2
+<ul>
+<li>Fixed bug in AGX file code; upped AGX file version number.
+<li>Added #include &lt;errno.h&gt; to rmem.c and interface.c
+<li>Fix Sun support and added Next support.
+<li>Reorganized file name routines and added PREFIX_EXT option.
+</ul>
+Changes for Version 0.7.1
+<ul>
+<li>Saving of counters/flags/variables and incrementing of counters
+now correctly includes the last one in each group.
+<li>Bugs fixed: memory overrun in ask_for_number() fixed,
+initialization of flag/variable/counter debugging pointers now done
+correctly. 
+<li>Linux port: Eliminated extra MOREs.
+</ul>
+Changes for Version 0.7
+<ul>
+<li>The DOS and Linux versions now support command history. 
+<li>The built-in getfile() has default filenames.
+<li>The parser uses the exitance of an ALL metacommand to determine if
+a given verb should accept multiple objects.
+<li>Whenever possible, errors are reported using the words the player
+typed in.
+<li>Configuration option NO_OBJECT_NOTES has been added.
+<li>Noun field RELATED_NAME is supported.
+<li>The disambiguator has been rewritten (yet again): disambiguation is
+now done using a scored system (rather than the previous pass-fail
+approach); it will arbitrarily pick in the case of two or more
+'identical' objects; actor disambiguation has been fixed; visibile
+scope is no longer assumed for dummy_verbs; a GLOBAL_SCOPE verb option
+has been added to allow game authors to define verbs that act on
+non-visible objects.
+<li>Added support for multiple commands to NPCs.
+<li>Support for new metacommands: OnDisambig, IsHostile,
+HostilePresent, NameWasPresent, OncePerTurn, SubtractFromTime,
+SetDisambigPriority, SetVariableToDeltaTime, ChangeStatus,
+MultiplyVariable, DivideVariable, ComputeRemainder, WaitForKey, SetHE,
+SetSHE, SetIT, SetTHEY, PrintMessagesNoNL, StandardMessage,
+FailMessage, FailStdMessage, ErrMessage, ErrStdMessage, and AND.
+<li>Added adjective support to the metacommand scanner. 
+<li>Assigned standard message numbers to error messages that weren't
+supported by the original AGT.
+<li>Added support for generalized operand types and NAME.
+<li>Added color code 9 for 'true' white.
+<li>New #define added: OPEN_AS_TEXT.
+<li>Changed AGX writing code to avoid seeks beyond end of file.
+<li>Created auxfile.c, moving code out of agtread.c and agtdata.c
+<li>If EndGame is run after a 'q' command has been entered, the game
+will quit without asking questions.
+<li>A couple of bugs in the tokeniser have been fixed.
+<li>Miscellaneous bugs fixed: noun initial descriptions print at the
+correct times; SendTreasureToRoom and IsCarryingTreasure, THROW/AFTER
+synonyms, BLOCK_HOSTILE, and noun.position are fixed; SHOW prints a more
+reasonable default error message; fixed the error message printed when
+ALL doesn't refer to anything; sorting of actor metacommands is now
+correct.
+<li>Reorganized command line argument parsing routine
+</ul>
+Changes for Version 0.6
+<ul>
+<li>Added support for Klaustrophbia's multiple game files and save files
+from previous versions of the same game.
+<li>Added INTRO verb to reprint the introduction of the game.
+<li>The introduction will now wait for you to hit any key before continuing.
+<li>Pronouns are now assigned to the last direct object in preference
+to the last indirect object.
+<li>agt_save(), agt_restore(), agt_newgame(), and agt_quit() added for
+use by event-driven ports. 
+<li>For DOS and Linux:  Title box formatting changed slightly, and 
+COMPASS option added. 
+<li>Line is no longer wrapped if the remainder consists only of spaces.
+<li>SHOOT now works.
+<li>Eliminated redundant (being worn) message.
+<li>Scope checks for built-in verbs have been centralized.
+<li>agtread.h now defaults to PLAIN platform.
+<li>Cleaned up header files.
+<li>SAVE now uses the last UNDO block which saves memory and allows
+asyncronous saves.
+<li>Other bugs fixed: the ordering of agildebug menu, the scoring of nouns
+and creatures, and processing of $your$.
+</ul>
+Changes for Version 0.5
+<ul>
+<li>Added support for new "AGX" file format, in agxfile.c; a new set
+of file manipulation routines have been added to rmem.c to support the
+format. There is a new pAGX #define for the extension of the new format.
+<li>Save and restore were rewritten to use the same file I/O code as the
+AGX routines; savefmt.h no longer exists. This seems to have fixed the
+bug with RESTART and UNDO overwriting the dictionary under DOS.
+<li>Save, restore, script, and log files now add an extension automatically.
+<li>Both the interpreter and agttest.c have been modified slightly to
+work with the new file format and a new program, agt2agx, has been
+added to convert AGT files to the AGX format.
+<li>To support the new format, the TTL and INS routines in agil.c have
+been rewritten.
+<li>The interpreter now waits until there is something on the status
+line before printing it out.
+<li>Extensions to the debugger: roomflags now can be viewed and
+modified; so can the gender field of creatures and user strings;
+formatting of output has been improved(thanks to Jay Goemmer's
+suggestions); main debugging menu reorganized; can now turn
+tracing of disambiguaion and of ANY verbs off; metacommand trace now
+prints out actors and REDIR instead of cryptic numbers to represent
+the first field of the command header.
+<li>dbg_nomsg added so messages will only be printed once when tracing
+metacommands rather than twice. 
+<li>The function init_interface() has been replace by two functions,
+init_interface() and start_interface();
+<li>Split exec.c into exec.c and object.c
+<li>Added a new file, agilstub.c, which needs to be linked with the
+non-interpreter utilities.
+<li>File read/write routines now do more comprehensive error checking.
+<li>AMIGA and HP-UX configurations have been added to the header
+(thanks to David Kinder and Alexander Lehmann) 
+<li>Boxes under the DOS interface are now in reverse video.
+<li>Fixed reading of CFG file so SLASH_BOLD would work.
+<li>All agtread output now goes through rprintf and from there through
+writestr and writeln. DIAG now defaults to 0 so there should be less
+output to begin with.
+<li>Added fix_ascii_flag and IBM_CHAR option which allow the decision
+about character translation to be made at run time.
+<li>Made a lot more limits dynamically set, including the number flags,
+variables, counters, dummy verbs, and subroutines;
+<li>LookAtRoom now prints the room description directly, rather than waiting
+until the end of the turn.
+<li>Object lists are now sorted by object number, so they will maintain
+a consistent ordering.
+<li>Changed handling of REPLACE_WORD so it will also replace synonyms.
+<li>Line break section of writestr() rewritten to fix a couple of bugs
+and os_dos.c has been fixed to get rid of extra line breaks.
+<li>The 1.5/F decoding of the DA2 file has been fixed so _The
+Multi-dimensional Thief_ should now work. 
+<li>Bugs fixed: exits now printed correctly by debugger; a few
+spelling errors fixed; YesNo and Chance bug; maxpix, maxpict, etc. are
+now converted to zero if they are negative; UserStrings now numbered
+from 1..25 rather than 0..24; fixed centering of status line; AFTER
+commands not scanned after GameEnd token anymore. 
+<li>Eliminated extra newline in Linux script files.
+<li>Fixed bug in os_linux.c, agt_option(), that caused it to report an
+error with COLORTERM  
+<li>General cleaning up of the code: picture/sound/font filenames are
+now stored in the main static string array; several redundant
+variables eliminated; read_descr() rewritten to work with new file
+format; eliminated distinction between regular and auxilary verbs;
+added get_opdef(); 
+<li>Moved most of the purity flags from uagt.h/agil.c to
+agtread.h/agtdata.c, so they would be visible to agxfile.c.
+<li>ReDirect now marked by a flip in sign instead of adding 2000;
+ANYBODY has been moved to 2 from 123; and &lt;no actor&gt; is now
+represented by 1 instead of 0 (so it can be negated).
+<li>Replace fixchar() and IBM character set translations by a look-up
+table to speed up reading of descriptions.
+<li>Tweaked room description printing so SPECIALS that send you to the same
+room don't cause the room description to be printed out again.
+<li>For Master's Edition games, now set have_meta flag based on
+last_cmd rather than on the value in the DA1 file (which is always
+true for ME games even if there are no metacommands).
+<li>Made several int data type more specific and made sure they were consistent
+with the corresponding save/restore/AGX file types.
+<li>Rewrote readnum() in agtread.c
+<li>Moved dictionary diagnostic stuff into a separate routine, which 	
+we can call from agttest.
+</ul>
+Changes for Version 0.4
+<ul>
+<li>Added intelligent disambiguation and ALL expansion. 
+<li>Added simple object viewers/editors to debugging system
+<li>The parser now converts SHOOT x AT y into SHOOT y WITH x 
+<li>The parser now handles TELL &lt;actor&gt; TO &lt;verb&gt; ... correctly. 
+<li>NO_BLOCK_HOSTILE and GET_HOSTILE are now supported.  
+<li>Added SOUND ON, SOUND OFF, INSTRUCTIONS (or INS)
+<li>Prompt is now bold as well as input text.
+<li>Added synonyms: 'inv' as synonym for 'inventory'; 'in' and 'inside'
+as synonyms for 'enter'  
+<li>Classic version 1.0 is now supported as is the version used by
+Cosmoserve 97, and the 1.5 variants used by Hotel Notell and The
+Multidimensional Thief.
+<li>The status line is now updated every time the player's location changes.
+<li>Version 1.83 now properly recognized even if there are no creatures.  
+<li>Titles in v1.83 are no longer automatically centered (to conform with
+the original interpreter). 
+<li>Split metacommand.c into metacommand.c and token.c
+<li>The contents of variables are now type-checked; fixed type output
+in agtdbg.c to accomadate the new variable format.
+<li>Interpreter now computes maximum score itself if value in .DA1 file is 0.
+<li>Fixed timing of "Creature is getting angrier" message
+<li>Fixed color/bold code in Linux.
+<li>Bold/color settings are now reset to normal after each description block.
+<li>For Master's Edition games, the 'door' virtual object is now given a lower
+disambiguation priority than non-present objects.  
+<li>Instructions now pass through IBM character decoding
+<li>Formating characters now stripped from status line. 
+<li>Code reorganizations: metacommands are now sorted by verb to speed
+up processing; reorganized dict data structures to be more compact;
+put in additonal error checking in check_lastcmd(); broke up
+exec_token() into exec_token(), exec_cond(), and exec_action(). 
+<li>Fixed bugs: title centering detection fixed; GetNumberInput's
+argument list fixed; NamePresent and ANYBODY commands have been
+corrected; DescribeThing is now able to describe rooms; 
+SetVariableTime now normalizes its data type; PlayerHas; 1.83 verb
+list was off; there was an extra "the" in the AGT info entry.
+</ul>
+Changes for Version 0.3
+<ul>
+<li>Instructions and an information screen can be viewed.
+<li>The title is now centered.
+<li>Added debugging features.
+<li>'it' refers to plural as well as singular antecedents.
+<li>SOGGY credits are printed out
+<li>Added IRUN support (-1 command line option)
+<li>AGiliTy can now understand the variant 1.5 versions.
+<li>Added LOG and REPLAY
+<li>Changed script output to append instead of replace existing files.
+<li>Added support for menu-driven input.
+<li>Added global and game-specific configuration files (.CFG)
+<li>Shrunk save files again.
+<li>Getfile now asks before overwriting.
+<li>Added pINS, pVOC, pOPT, pHNT 
+<li>Removed the last call to stat() from core code.
+<li>Moved file_size() to rmem.c
+<li>Split parser.c into parser.c and agil.c and reorganized
+initialization.
+<li>Added version and port strings
+<li>Rewrote DA6 reading code to work with only partial buffers.
+<li>Rewrote the type checking system to be more precise
+<li>DEBUG_AGT_CMD is now equivelent to flag[0].
+<li>rmalloc, rrealloc trap errors if too large a block is requested
+(determined by MAXSTRUCT).  
+<li>Rewrote color code to avoid collision of color tokens with '\t' and
+remapped the 1.83 '\' bold character.
+<li>Moved terminal tokens up to code 2000, to make it easier to add new
+tokens.
+<li>Code reorganization: moved concdup() from agtdata.c to rmem.c, making
+it public; reorganized file code in agtread.c and rmem.c; removed
+underline translator in tokeniser; rewrote fix_cmd; reorganized memory
+allocation in agtread.c to reduce fragmentation; added 'static' to a
+lot of declarations and reduced external linkage requirement to 8
+characters;  rfree macro rewritten; word lists("slists") now stored
+dynamically; opcode name list uses pointers instead of fixed length
+arrays. 
+<li>Fixed various bugs: various problems with PUT IN; ME/1.0 pictures,
+fonts,songs, and user strings ignored; cosmetic errors in
+print_contents; dictionary search case senstitive; various problems
+with INVISIBLE; 1.83 games crashed; ANYBODY not properly matched.
+</ul>
+Changes for Version 0.2
+<ul>
+<li>The save file format has shrunk.
+<li>Fixed print_title() to do IBM character translation for the title file.
+<li>RESTORE now verifies that save files are from the correct game.
+<li>Added support for version 1.18 games.
+<li>Metacommand debugging information now goes throught the standard
+screen output routines.
+<li>The interpreter now loads the game faster due to file buffering and
+a hash table for search_dict().
+<li>When program finds a lot of bad tokens it no longer floods the screen
+with warning messages
+<li>OR metacommand tokens are now handled consitently with the original
+interpreters. 
+<li>Reorganized exec.c into three files: exec.c, runverb.c, and metacommand.c
+and a header exec.h
+<li>DEBUG_OUT is now defined in uagt.h.
+<li>Completed internal support for fonts, music, and graphics. Of
+course these still require a port actually capable of using of this.
+<li>Rewrote file size functions to be more portable; eliminated NO_FILESIZE
+and REPLACE_FILESIZE
+<li>Added FAST_SETSIGN, using macros to speed this up on compatible systems.
+<li>Got rid of HUGE #defines; any individual data structure now fits in 64k
+<li>Changed print_obj() to not print out an object's short description if it
+starts with INVISIBLE even if it contains other words.
+<li>Changed MEM_MARGIN to 16k which should prevent the interpreter from
+starting up without enough memory and then dying mid-game.
+<li>Changed the way noun.position is handled to reduce the size of save
+files.
+<li>Cleaned up DA1 reading routines in agtread.c and aver encoding.
+<li>'long int' and 'short int' changed to 'long' and 'short' to allow
+#define int short int (for debugging purposes)
+<li>Cleaned up BRIEF and VERBOSE messages.
+<li>it_sdesc converted into a function
+<li>The code for reading DA6 files should now be endian independent.
+<li>Descriptions with '$' symbols now print correctly.
+<li>r?alloc calls with size zero are now handled correctly and rmem_trap
+is now correctly set.
+<li>Several memory leaks have been fixed.
+<li>Several other minor bugs have been fixed.
+</ul>
+Version 0.1
+<ul>
+<li>First public release
+</ul>
+ </body>
+</html>
+

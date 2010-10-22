@@ -1,0 +1,28 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" type="text/css" href="AGiliTy.css">
+ </head>
+ <body>
+<h1>Differences from the Original AGT Interpreters</h1>
+<ul>
+<li>Disambiguation is done on the normal command entry line rather than having a special prompt.
+<li>When asked "Which object do you mean?", it is possible to reply ANY, EITHER, BOTH, or ALL, as well as giving the name of an object.
+<li>LISTEXIT ON, LISTEXIT OFF will turn automatic listing of exits on or off (in AGT there is a LIST EXITS command, so some AGT games don't list exits to rooms).
+<li>OOPS, UNDO, and RESTART are supported (at least on systems with enough memory).
+<li>Adjective-only matches are accepted by the parser.
+<li>The parser is capable of intelligent disambiguation. 
+<li>It is also able to expand ALL and ALL EXCEPT (when appropriate options are set).
+<li>Some more multiple word verbs are automatically recognized (for example, GET IN is automatically translated into ENTER).
+<li>Some built-in verbs have additional synonyms. (In particular, standard one-letter abbreviations are supported: X for EXAMINE, Z for WAIT)
+<li>Game-specific synonyms are given a higher priority by the parser than the generic built-in synonyms.
+<li>The standard error messages are different than the original (except in Master's Edition games where most of the standard error messages are included in the game file)
+<li>SCRIPT output is sent to a file rather than to the printer.
+<li>AGiliTy has an extended AGILDEBUG debugging verb and supports more detailed metacommand tracing output.  
+<li>AGiliTy uses a different save file format.  
+<li>COLORS is not supported, although on some systems equivalent functionality may be supported in the configuration file.
+<li>The special title screen effects of the <b>Shades of Gray</b> and <b>Cosmoserve97</b> interpreters aren't duplicated.
+<li>Graphics, sound, and fonts are not supported on all platforms.</ul>
+ </body>
+</html>
+

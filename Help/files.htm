@@ -1,0 +1,33 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" type="text/css" href="AGiliTy.css">
+ </head>
+ <body>
+<h1>AGT and AGX Game Files</h1>
+Games in the AGT format can be found at the Interactive Fiction archive:<br>
+<a href="http://www.ifarchive.org/indexes/if-archiveXgamesXagt.html">http://www.ifarchive.org/indexes/if-archiveXgamesXagt.html</a>
+<p>
+AGT games are recognizable by having several different files with names like 'MYGAME.D$$', 'MYGAME.DA1', 'MYGAME.DA2', ... ,
+'MYGAME.DA6', 'MYGAME.TTL', etc. They also usually come with a DOS runtime interpreter (usually called RUN.EXE or MRUN.EXE),
+which can be deleted without affecting AGiliTy.
+<p>
+AGiliTy also has its own file format (with extension "AGX", which stands for "Adventure Game eXecutable"); existing AGT games
+can be converted into this format using the utility agt2agx which comes with AGiliTy. They can also be created from AGT source
+code by using the Magx compiler, available from<br>
+<a href="http://www.ifarchive.org/indexes/if-archiveXprogrammingXagtXmagx.html">http://www.ifarchive.org/indexes/if-archiveXprogrammingXagtXmagx.html</a>
+<p>
+The new format takes all of the various AGT files (MYGAME.DA1, MYGAME.DA2, MYGAME.DA3, MYGAME.DA4, MYGAME.DA5, MYGAME.DA6,
+MYGAME.TTL, MYGAME.INS, MYGAME.VOC, MYGAME.D$$, MYGAME.OPT, and parts of MYGAME.CFG) and puts all of the data in one file (MYGAME.AGX).
+<p>
+Aside from the reduction in directory clutter, it has the following advantages:
+<ol>
+<li>It's smaller; for large games the new format can save over 100K (The most extreme case I've run across so far is
+Shades of Gray: 790K vs. 568K uncompressed or 273K vs. 148K ZIPed).
+<li>It loads more quickly since it's closer in structure to AGiliTy's internal format. (In particular, the interpreter
+doesn't need to build the dictionary or convert metacommand opcodes into a common format). 
+<li>It's more portable. For example, there are platforms out there that can't handle the 'D$$' extension.
+</ol>
+ </body>
+</html>
+

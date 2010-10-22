@@ -1,0 +1,12 @@
+.topic 1
+If this option is set, then whenever a new game is loaded AGiliTy will attempt to resize the window so that the display is exactly 80 columns across. Some games require this for their text to appear correctly.
+.topic 2
+If this is set, then the colours are taken from the four colour well gadgets immediately below. If it is not set, the standard Windows fore and background colours are used.
+.topic 3
+Clicking on this button opens a colour dialog to set the text colour of the main interpreter window.
+.topic 4
+Clicking on this button opens a colour dialog to set the emphasis colour of the main interpreter window.
+.topic 5
+Clicking on this button opens a colour dialog to set the background colour of the main interpreter window.
+.topic 6
+Clicking on this button opens a colour dialog to set the status bar colour of the main interpreter window.
