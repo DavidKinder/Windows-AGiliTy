@@ -31,6 +31,7 @@
 #include "AGiliTyDoc.h"
 #include "AGiliTyView.h"
 #include "Dialogs.h"
+#include "DSoundEngine.h"
 
 extern "C" {
 #include ".\generic\agility.h"
@@ -38,6 +39,8 @@ extern "C" {
 }
 
 #include <conio.h>
+#include <math.h>
+#include <deque>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -277,18 +280,159 @@ extern "C" void agt_delay(int n)
     print_statline();
     Win32_Redraw();
 
-    DWORD StartTick = GetTickCount();
-    while ((GetTickCount() < StartTick+(n*1000)) && (AfxGetMainWnd() != NULL))
+    DWORD start = GetTickCount();
+    while (AfxGetMainWnd() != NULL)
+    {
+      DWORD now = GetTickCount();
+      if (now >= start+(n*1000))
+        break;
+      ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+(n*1000)-now,QS_ALLINPUT);
       Win32_CheckMsgLoop();
+    }
   }
 }
 
 /////////////////////////////////////////////////////////////////////////////
 // Produce a hz-Hertz sound for ms milliseconds
 /////////////////////////////////////////////////////////////////////////////
+
+// Sampling frequency
+static const int freq = 8000;
+
+struct Tone
+{
+  // The increment of the current point in the waveform cycle (between 0 and 1) per sample
+  double increment;
+  // The samples remaining to be played
+  int samplesLeft;
+
+  Tone(double hz, int time)
+  {
+    increment = hz / freq;
+    samplesLeft = (int)(time * (freq / 1000.0));
+  }
+};
+
+class ToneSound : public CDSound
+{
+  // The current position in the waveform cycle (between 0 and 1)
+  double m_current;
+
+  // Lock protecting the following
+  CCriticalSection m_lock;
+  // Tones to play: the first is currently playing
+  std::deque<Tone> m_tones;
+
+public:
+  ToneSound()
+  {
+    m_current = 0.0;
+  }
+
+  void PlayTone(double hz, int time)
+  {
+    CSingleLock guard(&m_lock,TRUE);
+    m_tones.push_back(Tone(hz,time));
+  }
+
+  void Play(void)
+  {
+    if (CreateBuffer(1,freq,8) == false)
+      return;
+    if (FillBuffer(GetBufferSize()) == false)
+      return;
+    SetBufferVolume(0);
+    PlayBuffer(false);
+  }
+
+  void WriteSampleData(unsigned char* sample, int len)
+  {
+    int i = 0;
+    while (i < len)
+    {
+      double increment;
+      int samplesToPlay;
+      {
+        CSingleLock guard(&m_lock,TRUE);
+
+        // If there's no tone left, break out of the loop
+        if (m_tones.empty())
+          break;
+
+        // Get the current tone
+        Tone& tone = m_tones.front();
+
+        // Work out how much more of the tone to play
+        increment = tone.increment;
+        samplesToPlay = (tone.samplesLeft > len-i) ? len-i : tone.samplesLeft;
+        tone.samplesLeft -= samplesToPlay;
+
+        // If the tone will be completely played, remove it
+        if (tone.samplesLeft <= 0)
+          m_tones.pop_front();
+      }
+
+      // Write part of the tone into the sample buffer
+      for (int j = 0; j < samplesToPlay; j++)
+      {
+        // Generate a square waveform
+        sample[i] = (m_current < 0.5) ? 255 : 0;
+        i++;
+
+        m_current += increment;
+        if (m_current > 1.0)
+          m_current = fmod(m_current,1.0);
+      }
+    }
+
+    // If there is any more of the buffer to fill, use silence
+    for (; i < len; i++)
+      sample[i] = 127;
+  }
+
+  bool IsSoundOver(DWORD tick)
+  {
+    return !m_Active;
+  }
+
+  int GetType(void)
+  {
+    return 1;
+  }
+};
+
+static ToneSound* tone = NULL;
+
 extern "C" void agt_tone(int hz,int ms)
 {
-  if (hz > 0)
+  if (hz < 0)
+    return;
+
+  CDSoundEngine& engine = CDSoundEngine::GetSoundEngine();
+  if (engine.Initialize() && (engine.GetStatus() == CDSoundEngine::STATUS_READY))
+  {
+    // Start the "tone" sound playing, if not already done
+    if (tone == NULL)
+    {
+      tone = new ToneSound();
+      tone->Play();
+    }
+
+    // Play the tone
+    tone->PlayTone(hz,ms);
+
+    // Wait for the sound to play, processing Windows events as they occur
+    DWORD start = GetTickCount();
+    while (AfxGetMainWnd() != NULL)
+    {
+      DWORD now = GetTickCount();
+      if (now >= start+ms)
+        break;
+      ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
+      Win32_CheckMsgLoop();
+    }
+  }
+  else
   {
     // Under Windows NT, the Win32 Beep() call can be used. Under
     // Windows 95, Beep() just plays the default sound event, whatever
@@ -308,9 +452,15 @@ extern "C" void agt_tone(int hz,int ms)
       int iControl = _inp(0x61);
       _outp(0x61,iControl|0x3);
 
-      DWORD StartTick = GetTickCount();
-      while ((GetTickCount() < StartTick+ms) && (AfxGetMainWnd() != NULL))
+      DWORD start = GetTickCount();
+      while (AfxGetMainWnd() != NULL)
+      {
+        DWORD now = GetTickCount();
+        if (now >= start+ms)
+          break;
+        ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
         Win32_CheckMsgLoop();
+      }
 
       _outp(0x61,iControl);
     }

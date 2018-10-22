@@ -14,6 +14,7 @@
 #include "AGiliTyView.h"
 #include "MainFrm.h"
 #include "Dialogs.h"
+#include "DSoundEngine.h"
 
 #include <shlobj.h>
 
@@ -163,6 +164,8 @@ int CAGiliTyApp::ExitInstance()
   WriteProfileInt("Window","Fix Columns",m_bFixColumns);
 
   WriteProfileString("Files","File Path",m_strFilePath);
+
+  CDSoundEngine::GetSoundEngine().Destroy();
 
   // Free memory
   delete m_pFontDialog;
