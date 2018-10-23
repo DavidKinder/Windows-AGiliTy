@@ -408,50 +408,27 @@ extern "C" void agt_tone(int hz,int ms)
   if (hz < 0)
     return;
 
-  CDSoundEngine& engine = CDSoundEngine::GetSoundEngine();
-  if (engine.Initialize() && (engine.GetStatus() == CDSoundEngine::STATUS_READY))
+  OSVERSIONINFO VerInfo;
+  VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+  GetVersionEx(&VerInfo);
+
+  // For Windows 2000 onwards ...
+  if (VerInfo.dwMajorVersion > 4)
   {
-    // Start the "tone" sound playing, if not already done
-    if (tone == NULL)
+    CDSoundEngine& engine = CDSoundEngine::GetSoundEngine();
+    if (engine.Initialize() && (engine.GetStatus() == CDSoundEngine::STATUS_READY))
     {
-      tone = new ToneSound();
-      tone->Play();
-    }
+      // Start the "tone" sound playing, if not already done
+      if (tone == NULL)
+      {
+        tone = new ToneSound();
+        tone->Play();
+      }
 
-    // Play the tone
-    tone->PlayTone(hz,ms);
+      // Play the tone
+      tone->PlayTone(hz,ms);
 
-    // Wait for the sound to play, processing Windows events as they occur
-    DWORD start = GetTickCount();
-    while (AfxGetMainWnd() != NULL)
-    {
-      DWORD now = GetTickCount();
-      if (now >= start+ms)
-        break;
-      ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
-      Win32_CheckMsgLoop();
-    }
-  }
-  else
-  {
-    // Under Windows NT, the Win32 Beep() call can be used. Under
-    // Windows 95, Beep() just plays the default sound event, whatever
-    // that might be. In this case the only recourse is to access the
-    // PC speaker directly.
-    
-    OSVERSIONINFO VerInfo;
-    VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-    GetVersionEx(&VerInfo);
-
-    if (VerInfo.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)
-    {
-      _outp(0x43,0xb6);
-      unsigned int iFreqPerTick = (unsigned int)(1193180L / hz);
-      _outp(0x42,(char)iFreqPerTick);
-      _outp(0x42,(char)(iFreqPerTick >> 8));
-      int iControl = _inp(0x61);
-      _outp(0x61,iControl|0x3);
-
+      // Wait for the sound to play, processing Windows events as they occur
       DWORD start = GetTickCount();
       while (AfxGetMainWnd() != NULL)
       {
@@ -461,12 +438,37 @@ extern "C" void agt_tone(int hz,int ms)
         ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
         Win32_CheckMsgLoop();
       }
-
-      _outp(0x61,iControl);
+      return;
     }
-    else
-      Beep(hz,ms);
   }
+
+  // Under Windows NT, the Win32 Beep() call can be used. Under
+  // Windows 95, Beep() just plays the default sound event, whatever
+  // that might be. In this case the only recourse is to access the
+  // PC speaker directly.
+  if (VerInfo.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)
+  {
+    _outp(0x43,0xb6);
+    unsigned int iFreqPerTick = (unsigned int)(1193180L / hz);
+    _outp(0x42,(char)iFreqPerTick);
+    _outp(0x42,(char)(iFreqPerTick >> 8));
+    int iControl = _inp(0x61);
+    _outp(0x61,iControl|0x3);
+
+    DWORD start = GetTickCount();
+    while (AfxGetMainWnd() != NULL)
+    {
+      DWORD now = GetTickCount();
+      if (now >= start+ms)
+        break;
+      ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
+      Win32_CheckMsgLoop();
+    }
+
+    _outp(0x61,iControl);
+  }
+  else
+    Beep(hz,ms);
 }
 
 /////////////////////////////////////////////////////////////////////////////

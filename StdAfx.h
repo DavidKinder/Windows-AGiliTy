@@ -23,3 +23,4 @@
 #include <afxcmn.h>
 #include <afxadv.h>
 #include <afxtempl.h>
+#include <afxmt.h>

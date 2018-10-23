@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="nafxcw.lib libcmt.lib"
+				AdditionalDependencies="nafxcw.lib libcmt.lib dsound.lib"
 				OutputFile=".\Release/AGiliTy.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
@@ -97,7 +97,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="nafxcwd.lib libcmtd.lib"
+				AdditionalDependencies="nafxcwd.lib libcmtd.lib dsound.lib"
 				OutputFile=".\Debug/AGiliTy.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
@@ -494,6 +494,9 @@ echo.
 					RelativePath="..\..\Libraries\mfc\ColourButton.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Libraries\mfc\DSoundEngine.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Libraries\mfc\Dialogs.cpp">
 				</File>
 				<File
@@ -543,6 +546,9 @@ echo.
 			</File>
 			<File
 				RelativePath="..\..\Libraries\mfc\ColourButton.h">
+			</File>
+			<File
+				RelativePath="..\..\Libraries\mfc\DSoundEngine.h">
 			</File>
 			<File
 				RelativePath="..\..\Libraries\mfc\Dialogs.h">
