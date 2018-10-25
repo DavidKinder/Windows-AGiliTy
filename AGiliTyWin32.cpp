@@ -39,7 +39,6 @@ extern "C" {
 }
 
 #include <conio.h>
-#include <math.h>
 #include <deque>
 
 #ifdef _DEBUG
@@ -301,22 +300,24 @@ static const int freq = 8000;
 
 struct Tone
 {
-  // The increment of the current point in the waveform cycle (between 0 and 1) per sample
-  double increment;
+  // The width of a square pulse, in samples
+  int pulseWidth;
   // The samples remaining to be played
   int samplesLeft;
 
   Tone(double hz, int time)
   {
-    increment = hz / freq;
+    pulseWidth = (int)(freq / (2 * hz));
     samplesLeft = (int)(time * (freq / 1000.0));
   }
 };
 
 class ToneSound : public CDSound
 {
-  // The current position in the waveform cycle (between 0 and 1)
-  double m_current;
+  // The current point in the square waveform, in samples
+  int m_current;
+  // The current amplitude of the waveform
+  unsigned char m_amplitude;
 
   // Lock protecting the following
   CCriticalSection m_lock;
@@ -326,7 +327,8 @@ class ToneSound : public CDSound
 public:
   ToneSound()
   {
-    m_current = 0.0;
+    m_current = 0;
+    m_amplitude = 0;
   }
 
   void PlayTone(double hz, int time)
@@ -350,7 +352,7 @@ public:
     int i = 0;
     while (i < len)
     {
-      double increment;
+      int pulseWidth;
       int samplesToPlay;
       {
         CSingleLock guard(&m_lock,TRUE);
@@ -363,7 +365,7 @@ public:
         Tone& tone = m_tones.front();
 
         // Work out how much more of the tone to play
-        increment = tone.increment;
+        pulseWidth = tone.pulseWidth;
         samplesToPlay = (tone.samplesLeft > len-i) ? len-i : tone.samplesLeft;
         tone.samplesLeft -= samplesToPlay;
 
@@ -376,18 +378,19 @@ public:
       for (int j = 0; j < samplesToPlay; j++)
       {
         // Generate a square waveform
-        sample[i] = (m_current < 0.5) ? 255 : 0;
-        i++;
-
-        m_current += increment;
-        if (m_current > 1.0)
-          m_current = fmod(m_current,1.0);
+        sample[i++] = m_amplitude;
+        m_current++;
+        if (m_current > pulseWidth)
+        {
+          m_current = 0;
+          m_amplitude = m_amplitude ? 0 : 255;
+        }
       }
     }
 
     // If there is any more of the buffer to fill, use silence
-    for (; i < len; i++)
-      sample[i] = 127;
+    while (i < len)
+      sample[i++] = 127;
   }
 
   bool IsSoundOver(DWORD tick)
