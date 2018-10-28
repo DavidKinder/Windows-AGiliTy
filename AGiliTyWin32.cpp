@@ -309,6 +309,11 @@ struct Tone
   {
     pulseWidth = (int)(freq / (2 * hz));
     samplesLeft = (int)(time * (freq / 1000.0));
+
+    // Round up the sample length to be a multiple of the pulse width
+    int pulses = samplesLeft / pulseWidth;
+    if (samplesLeft > pulses * pulseWidth)
+      samplesLeft = (pulses+1) * pulseWidth;
   }
 };
 
@@ -430,6 +435,10 @@ extern "C" void agt_tone(int hz,int ms)
 
       // Play the tone
       tone->PlayTone(hz,ms);
+
+      // Wait for slighlty less than the tone length, so that there are no
+      // gaps between consequeutive tones
+      ms -= 5;
 
       // Wait for the sound to play, processing Windows events as they occur
       DWORD start = GetTickCount();
