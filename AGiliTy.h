@@ -15,6 +15,7 @@
   #error include 'stdafx.h' before including this file for PCH
 #endif
 
+#include "DpiFunctions.h"
 #include "resource.h"       // main symbols
 
 /////////////////////////////////////////////////////////////////////////////
@@ -58,7 +59,8 @@ public:
   BOOL m_statusBar;
 
   LOGFONT m_LogFont;
-  CFontDialog* m_pFontDialog;
+  int m_iFontPoints;
+  DPI::FontDialog* m_pFontDialog;
 
   CString m_strGameFile;
   CString m_strFilePath;

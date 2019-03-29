@@ -10,12 +10,15 @@
 #include "StdAfx.h"
 #include "AGiliTy.h"
 #include "MainFrm.h"
+#include "DpiFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+extern BOOL bResetCursor;
 
 /////////////////////////////////////////////////////////////////////////////
 // CMainFrame
@@ -28,6 +31,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, MenuBarFrameWnd)
   ON_WM_CREATE()
   ON_COMMAND(ID_HELP_HELPTOPICS, OnHelp)
   //}}AFX_MSG_MAP
+  ON_MESSAGE(WM_DPICHANGED, OnDpiChanged)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -38,7 +42,7 @@ static UINT indicators[] =
   ID_INDICATOR_SCRL,
 };
 
-CMainFrame::CMainFrame()
+CMainFrame::CMainFrame() : m_dpi(96)
 {
 }
 
@@ -51,10 +55,23 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
   CAGiliTyApp* pApp = (CAGiliTyApp*)AfxGetApp();
   ASSERT_VALID(pApp);
 
+  m_dpi = DPI::getWindowDPI(this);
+
+  // Now we have a window, set the font height
+  pApp->m_LogFont.lfHeight = -MulDiv(pApp->m_iFontPoints,m_dpi,72);
+
+  // Restore the window size and position from DPI neutral values
+  CRect rPlace = pApp->m_WindowRect;
+  if (rPlace.Width() > 0)
+  {
+    DPI::ContextUnaware dpiUnaware;
+    MoveWindow(rPlace);
+  }
+
   if (MenuBarFrameWnd::OnCreate(lpCreateStruct) == -1)
     return -1;
   
-  if (!CreateBar(IDR_MAINFRAME,IDB_TOOLBAR32))
+  if (!CreateNewBar(IDR_MAINFRAME,IDR_TOOLBAR))
     return -1;
 
   if (!m_statusBar.Create(this) ||
@@ -71,20 +88,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
-  CAGiliTyApp* pApp = (CAGiliTyApp*)AfxGetApp();
-  ASSERT_VALID(pApp);
-
   cs.style &= ~FWS_ADDTOTITLE;
-
-  CRect& rPlace = pApp->m_WindowRect;
-  if (rPlace.Width() > 0)
-  {
-    cs.x = rPlace.left;
-    cs.y = rPlace.top;
-    cs.cx = rPlace.Width();
-    cs.cy = rPlace.Height();
-  }
-
   return MenuBarFrameWnd::PreCreateWindow(cs);
 }
 
@@ -95,11 +99,12 @@ BOOL CMainFrame::DestroyWindow()
 
   // Save the window state
   WINDOWPLACEMENT Place;
-  GetWindowPlacement(&Place);
+  {
+    DPI::ContextUnaware dpiUnaware;
+    GetWindowPlacement(&Place);
+  }
   pApp->m_iWindowMax = (Place.showCmd == SW_SHOWMAXIMIZED);
-
-  // Save the window position and size
-  GetWindowRect(pApp->m_WindowRect);
+  pApp->m_WindowRect = Place.rcNormalPosition;
 
   // Save the toolbar and status bar
   pApp->m_toolBar = m_toolBar.GetStyle() & WS_VISIBLE;
@@ -111,6 +116,28 @@ BOOL CMainFrame::DestroyWindow()
 void CMainFrame::OnHelp() 
 {
   HtmlHelp(0,HH_HELP_FINDER);
+}
+
+LRESULT CMainFrame::OnDpiChanged(WPARAM wparam, LPARAM lparam)
+{
+  CAGiliTyApp* pApp = (CAGiliTyApp*)AfxGetApp();
+  ASSERT_VALID(pApp);
+
+  int newDpi = (int)HIWORD(wparam);
+  if (m_dpi != newDpi)
+  {
+    CAGiliTyApp* pApp = (CAGiliTyApp*)AfxGetApp();
+    pApp->m_LogFont.lfHeight = -MulDiv(pApp->m_iFontPoints,newDpi,72);
+    m_dpi = newDpi;
+  }
+
+  bResetCursor = TRUE;
+  MoveWindow((LPRECT)lparam,TRUE);
+
+  // Force the menu and status bars to update
+  UpdateDPI(newDpi);
+  m_statusBar.SetIndicators(indicators,sizeof(indicators)/sizeof(UINT));
+  return 0;
 }
 
 #ifdef _DEBUG

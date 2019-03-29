@@ -5,7 +5,7 @@
 #define IDR_MANIFEST                    1
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
-#define IDB_TOOLBAR32                   129
+#define IDR_TOOLBAR                     129
 #define IDD_OPTIONS                     130
 #define IDC_COLOURS                     1000
 #define IDCS_TEXT                       1002

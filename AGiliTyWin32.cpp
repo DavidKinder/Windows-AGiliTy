@@ -114,6 +114,8 @@ int iCursorY = 1;
 int iBoxX = 0;
 int iScrollCount = 0;
 bool bInBox = false;
+bool bCaret = false;
+bool bInput = false;
 
 void Win32_SetCharacter(int x, int y, char c);
 void Win32_CheckMsgLoop(void);
@@ -188,20 +190,23 @@ void Win32_CaretOn(int& iFontWidth, int& iFontHeight)
   if (pView == NULL)
     return;
 
-  CFont* pFont = new CFont();
-  pFont->CreateFontIndirect(&(pApp->m_LogFont));
+  CFont Font;
+  Font.CreateFontIndirect(&(pApp->m_LogFont));
 
   CPaintDC DC(pView);
   TEXTMETRIC FontInfo;
-  CFont* pOldFont = DC.SelectObject(pFont);
+  CFont* pOldFont = DC.SelectObject(&Font);
   DC.GetTextMetrics(&FontInfo);
   iFontWidth = (int)FontInfo.tmAveCharWidth;
   iFontHeight = (int)FontInfo.tmHeight;
   DC.SelectObject(pOldFont);
-  delete pFont;
 
-  pView->CreateSolidCaret(iFontWidth,iFontHeight);
-  pView->ShowCaret();
+  if ((CWnd::GetFocus() == pView) && !bCaret)
+  {
+    pView->CreateSolidCaret(iFontWidth,iFontHeight);
+    pView->ShowCaret();
+    bCaret = true;
+  }
 }
 
 void Win32_CaretOff(void)
@@ -210,8 +215,12 @@ void Win32_CaretOff(void)
   if (pView == NULL)
     return;
 
-  pView->HideCaret();
-  ::DestroyCaret();
+  if (bCaret)
+  {
+    pView->HideCaret();
+    ::DestroyCaret();
+    bCaret = false;
+  }
 }
 
 void Win32_SetScreenSize(BOOL bSetWidth)
@@ -227,17 +236,16 @@ void Win32_SetScreenSize(BOOL bSetWidth)
   CRect ViewRect;
   pView->GetClientRect(ViewRect);
 
-  CFont* pFont = new CFont();
-  pFont->CreateFontIndirect(&(pApp->m_LogFont));
+  CFont Font;
+  Font.CreateFontIndirect(&(pApp->m_LogFont));
 
   CPaintDC DC(pView);
   TEXTMETRIC FontInfo;
-  CFont* pOldFont = DC.SelectObject(pFont);
+  CFont* pOldFont = DC.SelectObject(&Font);
   DC.GetTextMetrics(&FontInfo);
   int iFontWidth = (int)FontInfo.tmAveCharWidth;
   int iFontHeight = (int)FontInfo.tmHeight;
   DC.SelectObject(pOldFont);
-  delete pFont;
 
   int iOldWidth = screen_width;
   int iOldHeight = screen_height;
@@ -515,12 +523,16 @@ extern "C" char *agt_input(int in_type)
   bResetCursor = FALSE;
   Win32_Redraw();
   Win32_CaretOn(iFontWidth,iFontHeight);
+  bInput = true;
 
   while (iInputChar != 13)
   {
     CAGiliTyView* pView = CAGiliTyView::GetView();
     if (pView == NULL)
+    {
+      bInput = false;
       return s;
+    }
 
     if (bResetCursor)
     {
@@ -535,7 +547,10 @@ extern "C" char *agt_input(int in_type)
     // Get the view again in case exiting has caused it to be deleted
     pView = CAGiliTyView::GetView();
     if (pView == NULL)
+    {
+      bInput = false;
       return s;
+    }
 
     CArray<int,int>& iInput = pView->m_iInput;
     if (iInput.GetSize() > 0)
@@ -641,6 +656,7 @@ extern "C" char *agt_input(int in_type)
   if (script_on)
     fprintf(scriptfile,"%s\n",s);
 
+  bInput = false;
   Win32_CaretOff();
   agt_newline();
 
@@ -668,12 +684,16 @@ extern "C" char agt_getkey(rbool echo_char)
   bResetCursor = FALSE;
   Win32_Redraw();
   Win32_CaretOn(iFontWidth,iFontHeight);
+  bInput = true;
 
   while (iInputChar == '\0')
   {
     pView = CAGiliTyView::GetView();
     if (pView == NULL)
+    {
+      bInput = false;
       return 0;
+    }
 
     if (bResetCursor)
     {
@@ -688,7 +708,10 @@ extern "C" char agt_getkey(rbool echo_char)
     // Get the view again in case exiting has caused it to be deleted
     pView = CAGiliTyView::GetView();
     if (pView == NULL)
+    {
+      bInput = false;
       return 0;
+    }
 
     CArray<int,int>& iInput = pView->m_iInput;
     if (iInput.GetSize() > 0)
@@ -709,6 +732,7 @@ extern "C" char agt_getkey(rbool echo_char)
     agt_newline();
   }
 
+  bInput = false;
   Win32_CaretOff();
   return (char)iInputChar;
 }

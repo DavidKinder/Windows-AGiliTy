@@ -11,6 +11,7 @@
 #include "AGiliTy.h"
 #include "AGiliTyDoc.h"
 #include "AGiliTyView.h"
+#include "DpiFunctions.h"
 
 extern "C" {
 #include ".\generic\agility.h"
@@ -18,6 +19,10 @@ extern "C" {
 }
 
 extern unsigned int *pScreenBuffer;
+extern bool bInput;
+
+void Win32_CaretOn(int& iFontWidth, int& iFontHeight);
+void Win32_CaretOff(void);
 void Win32_SetScreenSize(BOOL bSetWidth);
 void Win32_Redraw(int iTop = 0, int iLeft = 0);
 
@@ -39,6 +44,8 @@ BEGIN_MESSAGE_MAP(CAGiliTyView, CView)
   ON_WM_KEYDOWN()
   ON_WM_SIZE()
   ON_WM_ERASEBKGND()
+  ON_WM_KILLFOCUS()
+  ON_WM_SETFOCUS()
   //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -253,24 +260,30 @@ void CAGiliTyView::ResizeWindow(void)
       pFrame->GetWindowRect(FrameRect);
 
       // Create an instance of the current font
-      CFont* pFont = new CFont();
-      pFont->CreateFontIndirect(&(pApp->m_LogFont));
+      CFont Font;
+      Font.CreateFontIndirect(&(pApp->m_LogFont));
 
       CPaintDC DC(this);
       TEXTMETRIC FontInfo;
-      CFont* pOldFont = DC.SelectObject(pFont);
+      CFont* pOldFont = DC.SelectObject(&Font);
       DC.GetTextMetrics(&FontInfo);
       int iFontWidth = (int)FontInfo.tmAveCharWidth;
       DC.SelectObject(pOldFont);
-      delete pFont;
 
       // Work out the new frame width
       FrameRect.right += (screen_width*iFontWidth)-ViewRect.Width();
 
       // Check that the window is not off the screen
-      int iScreenWidth = ::GetSystemMetrics(SM_CXFULLSCREEN);
-      if (FrameRect.right > iScreenWidth)
-        FrameRect.OffsetRect(-1*FrameRect.left,0);
+      CRect MonRect = DPI::getMonitorRect(pFrame);
+      if (FrameRect.right > MonRect.right)
+      {
+        int offsetLeft = FrameRect.left-MonRect.left;
+        int offsetRight = FrameRect.right-MonRect.right;
+        if (offsetRight > offsetLeft)
+          offsetRight = offsetLeft;
+        if (offsetRight  > 0)
+          FrameRect.OffsetRect(-1*offsetRight,0);
+      }
 
       // Resize the frame
       pFrame->MoveWindow(FrameRect,TRUE);
@@ -281,6 +294,22 @@ void CAGiliTyView::ResizeWindow(void)
 BOOL CAGiliTyView::OnEraseBkgnd(CDC* pDC) 
 {
   return 1;
+}
+
+void CAGiliTyView::OnKillFocus(CWnd* pNewWnd)
+{
+  Win32_CaretOff();
+  CView::OnKillFocus(pNewWnd);
+}
+
+void CAGiliTyView::OnSetFocus(CWnd* pOldWnd)
+{
+  CView::OnSetFocus(pOldWnd);
+  if (bInput)
+  {
+    int iFontWidth, iFontHeight;
+    Win32_CaretOn(iFontWidth,iFontHeight);
+  }
 }
 
 #ifdef _DEBUG

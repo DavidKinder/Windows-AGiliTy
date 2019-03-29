@@ -70,7 +70,12 @@ BOOL CAGiliTyApp::InitInstance()
   SetRegistryKey(_T("David Kinder"));
   LoadStdProfileSettings();
 
-  m_LogFont.lfHeight = GetProfileInt("Display","Font Size",-12);
+  int fontSize = GetProfileInt("Display","Font Size",10);
+  if (fontSize < 0)
+    m_iFontPoints = -MulDiv(fontSize,72,DPI::getSystemDPI());
+  else
+    m_iFontPoints = fontSize;
+  m_LogFont.lfHeight = -MulDiv(m_iFontPoints,DPI::getSystemDPI(),72);
   m_LogFont.lfCharSet = ANSI_CHARSET;
   m_LogFont.lfOutPrecision = OUT_TT_PRECIS;
   m_LogFont.lfClipPrecision = CLIP_DEFAULT_PRECIS;
@@ -121,17 +126,18 @@ BOOL CAGiliTyApp::InitInstance()
   // Notify the shell that associations have changed
   ::SHChangeNotify(SHCNE_ASSOCCHANGED,SHCNF_IDLIST,0,0);
 
-  // Create font dialog
-  m_pFontDialog = new CFontDialog(&m_LogFont,CF_SCREENFONTS|CF_FIXEDPITCHONLY);
-  if (m_pFontDialog == NULL)
-    return FALSE;
-
   // Parse command line for standard shell commands, DDE, file open
   CCommandLineInfo cmdInfo;
   ParseCommandLine(cmdInfo);
 
   // Dispatch commands specified on the command line
   if (!ProcessShellCommand(cmdInfo))
+    return FALSE;
+
+  // Create font dialog
+  m_pFontDialog = new DPI::FontDialog(&m_LogFont,
+    CF_SCREENFONTS|CF_FIXEDPITCHONLY,m_pMainWnd);
+  if (m_pFontDialog == NULL)
     return FALSE;
 
   m_pMainWnd->ShowWindow(SW_SHOW);
@@ -146,7 +152,7 @@ int CAGiliTyApp::ExitInstance()
   // Write out settings
 
   WriteProfileString("Display","Font Name",CString(m_LogFont.lfFaceName));
-  WriteProfileInt("Display","Font Size",m_LogFont.lfHeight);
+  WriteProfileInt("Display","Font Size",m_iFontPoints);
 
   WriteProfileInt("Colours","Enabled",m_bColours);
   WriteProfileInt("Colours","Text",m_TextColour);
@@ -264,6 +270,8 @@ void CAGiliTyApp::OnViewFont()
   // Change the font
   if (m_pFontDialog->DoModal() == IDOK)
   {
+    m_iFontPoints = m_pFontDialog->m_cf.iPointSize / 10;
+
     CAGiliTyView* pView = CAGiliTyView::GetView();
     if (pView)
     {
