@@ -161,14 +161,14 @@ BEGIN
                     14,31,159,8
 END
 
-IDD_OPTIONS DIALOGEX 0, 0, 221, 103
+IDD_OPTIONS DIALOGEX 0, 0, 165, 124
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CONTEXTHELP | WS_POPUP | 
     WS_CAPTION | WS_SYSMENU
 CAPTION "Options"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,164,7,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,164,25,50,14
+    DEFPUSHBUTTON   "OK",IDOK,52,103,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,103,50,14
     GROUPBOX        "Window",IDC_STATIC_WINDOW,7,3,151,29
     CONTROL         "&Fix window at 80 columns",IDC_SIZE_WINDOW,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,34,16,96,8
@@ -176,17 +176,13 @@ BEGIN
     CONTROL         "&Enable colours",IDC_COLOURS,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,61,45,63,9
     RTEXT           "&Text",IDCS_TEXT,26,61,17,8
-    CONTROL         "",IDC_TEXT,"Button",WS_TABSTOP,47,59,27,
-                    13
+    PUSHBUTTON      "",IDC_TEXT,47,59,27,13
     RTEXT           "&Background",IDCS_BACK,78,61,40,8
-    CONTROL         "",IDC_BACK,"Button",WS_TABSTOP,122,59,27,
-                    13
+    PUSHBUTTON      "",IDC_BACK,122,59,27,13
     RTEXT           "E&mphasis",IDCS_EMPHASIS,12,77,32,8
-    CONTROL         "",IDC_EMPHASIS,"Button",WS_TABSTOP,47,75,
-                    27,13
+    PUSHBUTTON      "",IDC_EMPHASIS,47,75,27,13
     RTEXT           "&Status bar",IDCS_STATUS,82,77,36,8
-    CONTROL         "",IDC_STATUS,"Button",WS_TABSTOP,122,75,
-                    27,13
+    PUSHBUTTON      "",IDC_STATUS,122,75,27,13
 END
 
 
@@ -247,8 +243,8 @@ BEGIN
     IDD_OPTIONS, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 214
-        BOTTOMMARGIN, 96
+        RIGHTMARGIN, 158
+        BOTTOMMARGIN, 117
     END
 END
 #endif    // APSTUDIO_INVOKED
