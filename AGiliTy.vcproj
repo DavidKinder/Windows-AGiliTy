@@ -455,6 +455,22 @@ echo.
 				</File>
 				<File
 					RelativePath=".\AGiliTy.rc">
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Compiling resources with SDK resource compiler..."
+							CommandLine="&quot;C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin\rc&quot; /d NDEBUG /l 0x809 /i $(ConfigurationName) /fo $(ConfigurationName)/$(InputName).res $(InputFileName)"
+							Outputs="$(ConfigurationName)/$(InputName).res"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Compiling resources with SDK resource compiler..."
+							CommandLine="&quot;C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin\rc&quot; /d _DEBUG /l 0x809 /i $(ConfigurationName) /fo $(ConfigurationName)/$(InputName).res $(InputFileName)"
+							Outputs="$(ConfigurationName)/$(InputName).res"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\AGiliTyDoc.cpp">
