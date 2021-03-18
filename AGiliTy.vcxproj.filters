@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{e1cab3e2-8213-4315-a02b-6a09f21270bf}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Generic">
+      <UniqueIdentifier>{8cb8016c-d934-44de-9e39-f88c754a767f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows">
+      <UniqueIdentifier>{d7234465-eeb6-4abc-b0fe-c26ab2129f51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LibPNG">
+      <UniqueIdentifier>{0a1d038a-4ba3-4190-b829-0773a03fc575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ZLib">
+      <UniqueIdentifier>{2154f3c0-d118-4267-9b4b-e04da10edc6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{02681264-9e5f-481e-b23f-b601f5770bc3}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{aea9ed50-f74a-4520-a0d0-ad766e7e0a15}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="generic\agil.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\agtread.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\agxfile.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\auxfile.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\debugcmd.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Generic\disassemble.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\exec.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Generic\filename.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Generic\gamedata.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\interface.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\metacommand.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\object.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\parser.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\runverb.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\savegame.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="generic\token.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Generic\util.c">
+      <Filter>Source Files\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="AGiliTy.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="AGiliTyDoc.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="AGiliTyOptDlg.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="AGiliTyView.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="AGiliTyWin32.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\ColourButton.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\DSoundEngine.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\Dialogs.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\DpiFunctions.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\ImagePNG.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\MenuBar.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\png.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngerror.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngget.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngmem.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngpread.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngread.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngrio.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngrtran.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngrutil.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngset.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\libpng\pngtrans.c">
+      <Filter>Source Files\LibPNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\adler32.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\crc32.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\inffast.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\inflate.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\inftrees.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\trees.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\uncompr.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\zlib\zutil.c">
+      <Filter>Source Files\ZLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\mfc\ScaleGfx.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\AGiliTy.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AGiliTy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AGiliTyDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AGiliTyOptDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AGiliTyView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\ColourButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\DSoundEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\Dialogs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\DpiFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\ImagePNG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\MenuBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\mfc\ScaleGfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\AGiliTy.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\AGiliTy.manifest">
+      <Filter>Resource Files</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="agil.cfg">
+      <Filter>Source Files\Generic</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Help\AGiliTy.hhp">
+      <Filter>Source Files\Windows</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AGiliTy.rc">
+      <Filter>Source Files\Windows</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

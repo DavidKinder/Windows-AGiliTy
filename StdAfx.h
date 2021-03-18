@@ -12,11 +12,26 @@
 #pragma once
 #define VC_EXTRALEAN
 #define _AFX_ALL_WARNINGS
+#define _AFX_NO_MFC_CONTROLS_IN_DIALOGS
 
-#define WINVER 0x0501         // Windows XP
-#define _WIN32_WINNT 0x0501
-#define _WIN32_WINDOWS 0x0501
-#define _WIN32_IE 0x0501      // Internet Explorer 5.5
+#define _WIN32_WINNT 0x0600
+
+// Undefine memory allocation, deallocation and exit functions
+#ifdef malloc
+#undef malloc
+#endif
+
+#ifdef realloc
+#undef realloc
+#endif
+
+#ifdef free
+#undef free
+#endif
+
+#ifdef exit
+#undef exit
+#endif
 
 #include <afxwin.h>
 #include <afxext.h>

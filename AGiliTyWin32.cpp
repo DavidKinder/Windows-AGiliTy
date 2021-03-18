@@ -7,23 +7,6 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-// Undefine memory allocation, deallocation and exit functions
-#ifdef malloc
-#undef malloc
-#endif
-
-#ifdef realloc
-#undef realloc
-#endif
-
-#ifdef free
-#undef free
-#endif
-
-#ifdef exit
-#undef exit
-#endif
-
 #pragma warning(disable : 4273)
 
 #include "StdAfx.h"
@@ -38,7 +21,6 @@ extern "C" {
 #include ".\generic\interp.h"
 }
 
-#include <conio.h>
 #include <deque>
 
 #ifdef _DEBUG
@@ -424,57 +406,24 @@ extern "C" void agt_tone(int hz,int ms)
   if (hz < 0)
     return;
 
-  OSVERSIONINFO VerInfo;
-  VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-  GetVersionEx(&VerInfo);
-
-  // For Windows 2000 onwards ...
-  if (VerInfo.dwMajorVersion > 4)
+  CDSoundEngine& engine = CDSoundEngine::GetSoundEngine();
+  if (engine.Initialize() && (engine.GetStatus() == CDSoundEngine::STATUS_READY))
   {
-    CDSoundEngine& engine = CDSoundEngine::GetSoundEngine();
-    if (engine.Initialize() && (engine.GetStatus() == CDSoundEngine::STATUS_READY))
+    // Start the "tone" sound playing, if not already done
+    if (tone == NULL)
     {
-      // Start the "tone" sound playing, if not already done
-      if (tone == NULL)
-      {
-        tone = new ToneSound();
-        tone->Play();
-      }
-
-      // Play the tone
-      tone->PlayTone(hz,ms);
-
-      // Wait for slighlty less than the tone length, so that there are no
-      // gaps between consequeutive tones
-      ms -= 5;
-
-      // Wait for the sound to play, processing Windows events as they occur
-      DWORD start = GetTickCount();
-      while (AfxGetMainWnd() != NULL)
-      {
-        DWORD now = GetTickCount();
-        if (now >= start+ms)
-          break;
-        ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
-        Win32_CheckMsgLoop();
-      }
-      return;
+      tone = new ToneSound();
+      tone->Play();
     }
-  }
 
-  // Under Windows NT, the Win32 Beep() call can be used. Under
-  // Windows 95, Beep() just plays the default sound event, whatever
-  // that might be. In this case the only recourse is to access the
-  // PC speaker directly.
-  if (VerInfo.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)
-  {
-    _outp(0x43,0xb6);
-    unsigned int iFreqPerTick = (unsigned int)(1193180L / hz);
-    _outp(0x42,(char)iFreqPerTick);
-    _outp(0x42,(char)(iFreqPerTick >> 8));
-    int iControl = _inp(0x61);
-    _outp(0x61,iControl|0x3);
+    // Play the tone
+    tone->PlayTone(hz,ms);
 
+    // Wait for slighlty less than the tone length, so that there are no
+    // gaps between consequeutive tones
+    ms -= 5;
+
+    // Wait for the sound to play, processing Windows events as they occur
     DWORD start = GetTickCount();
     while (AfxGetMainWnd() != NULL)
     {
@@ -484,11 +433,7 @@ extern "C" void agt_tone(int hz,int ms)
       ::MsgWaitForMultipleObjects(0,NULL,FALSE,start+ms-now,QS_ALLINPUT);
       Win32_CheckMsgLoop();
     }
-
-    _outp(0x61,iControl);
   }
-  else
-    Beep(hz,ms);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -961,7 +906,7 @@ extern "C" void start_interface(fc_type fc)
   if (stable_random)
     srand(6);
   else 
-    srand(time(0));
+    srand((unsigned int)time(0));
 
   if (pApp->m_bFixColumns)
     screen_width = 80;
