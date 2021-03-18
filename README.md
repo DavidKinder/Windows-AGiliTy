@@ -4,6 +4,8 @@ Windows AGiliTy is an interpreter for the old Adventure Game Toolkit (AGT). Alth
 
 Windows AGiliTy is a port of Robert Masenten's AGiliTy, a reverse engineered interpreter that can play games produced with any of the many versions of AGT.
 
+![AGiliTy playing Shades of Gray](Shades%20of%20Gray.png)
+
 ## Building
 
 Download and install Visual Studio 2019 Community edition from https://visualstudio.microsoft.com/. In the installer, under "Workloads", make sure that "Desktop development with C++" is selected, and under "Individual components" that "C++ MFC for latest build tools (x86 & x64)" is selected.
