@@ -1,0 +1,5 @@
+*.chm
+*.user
+.vs/
+Debug/
+Release/
