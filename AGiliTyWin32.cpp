@@ -942,8 +942,8 @@ FILE *get_user_file(int ft)
     title = "Script File";
     save = 1;
     otype = "a";
-    pszFilter = "Script Files (*.scr)|*.scr|All Files (*.*)|*.*||";
-    ext = "scr";
+    pszFilter = "Script Files (*.txt)|*.txt|All Files (*.*)|*.*||";
+    ext = "txt";
     break;
   case 1:
     title = "Save Game";
