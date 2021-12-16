@@ -626,6 +626,8 @@ extern "C" char agt_getkey(rbool echo_char)
     return 0;
 
   print_statline();
+
+  iScrollCount = 0;
   bResetCursor = FALSE;
   Win32_Redraw();
   Win32_CaretOn(iFontWidth,iFontHeight);
@@ -790,16 +792,16 @@ extern "C" void agt_newline(void)
   else
     iCursorY++;
 
-  if (bInBox == 0)
+  if ((bInBox == 0) && (fast_replay == 0))
   {
     iScrollCount++;
     if (iScrollCount >= screen_height-1)
     {
       curr_x = 0;
-      agt_puts("  --MORE--");
+      agt_puts("[MORE]");
       agt_getkey(0);
       curr_x = 0;
-      agt_puts("          ");
+      agt_puts("      ");
       curr_x = 0;
       iScrollCount = 0;
     }
