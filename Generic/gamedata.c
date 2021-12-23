@@ -1200,7 +1200,7 @@ void sort_cmd(void)
   }
 
 #ifdef SORT_META
-  if (!agx_file && aver>=AGX00) rsort();
+  if (!agx_file) rsort();
 #endif
 
 
