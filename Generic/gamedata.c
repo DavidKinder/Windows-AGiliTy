@@ -1200,9 +1200,8 @@ void sort_cmd(void)
   }
 
 #ifdef SORT_META
-  if (!agx_file) rsort();
+  rsort();
 #endif
-
 
   if (no_auxsyn) return; /* Used by agt2agx */
 
