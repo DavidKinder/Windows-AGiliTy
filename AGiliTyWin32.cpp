@@ -603,7 +603,6 @@ extern "C" char *agt_input(int in_type)
 
   bInput = false;
   Win32_CaretOff();
-  agt_newline();
 
   return s;
 }
@@ -676,7 +675,6 @@ extern "C" char agt_getkey(rbool echo_char)
     pszEcho[0] = (char)iInputChar;
     pszEcho[1] = '\0';
     agt_puts(pszEcho);
-    agt_newline();
   }
 
   bInput = false;
@@ -795,7 +793,7 @@ extern "C" void agt_newline(void)
   if ((bInBox == 0) && (fast_replay == 0))
   {
     iScrollCount++;
-    if (iScrollCount >= screen_height-1)
+    if (iScrollCount >= screen_height-2)
     {
       curr_x = 0;
       agt_puts("[MORE]");
