@@ -515,7 +515,6 @@ static void mainloop(void)
       if (!menu_mode) {
 	prompt_out(1);
 	s=agt_readline(0);
-	agt_newline();
 	if (!doing_restore) tokenise(s);   /* Tokenizes into input */
 	rfree(s);
 	if (!doing_restore) parse_loop();
