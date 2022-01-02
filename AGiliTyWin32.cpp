@@ -603,10 +603,7 @@ extern "C" char *agt_input(int in_type)
 
   bInput = false;
   Win32_CaretOff();
-
-  curr_x += strlen(s);
-  if (curr_x >= screen_width)
-    curr_x = 0;
+  agt_newline();
 
   return s;
 }
@@ -679,6 +676,7 @@ extern "C" char agt_getkey(rbool echo_char)
     pszEcho[0] = (char)iInputChar;
     pszEcho[1] = '\0';
     agt_puts(pszEcho);
+    agt_newline();
   }
 
   bInput = false;
