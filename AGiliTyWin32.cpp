@@ -98,6 +98,7 @@ int iScrollCount = 0;
 bool bInBox = false;
 bool bCaret = false;
 bool bInput = false;
+unsigned int iRandomGenerate = 2345;
 
 void Win32_SetCharacter(int x, int y, char c);
 void Win32_CheckMsgLoop(void);
@@ -264,7 +265,7 @@ void Win32_ResizeScreen(int iOldWidth, int iOldHeight)
 /////////////////////////////////////////////////////////////////////////////
 extern "C" void agt_delay(int n)
 {
-  if (!BATCH_MODE)
+  if (!BATCH_MODE && !fast_replay)
   {
     print_statline();
     Win32_Redraw();
@@ -441,7 +442,9 @@ extern "C" void agt_tone(int hz,int ms)
 /////////////////////////////////////////////////////////////////////////////
 extern "C" int agt_rand(int a,int b)
 {
-  return a+(rand()>>2)%(b-a+1);
+  iRandomGenerate = iRandomGenerate * 214013 + 2531011;
+  unsigned int num = (iRandomGenerate >> 16) & 0xFFFF;
+  return a + (num % (b-a+1));
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -792,7 +795,7 @@ extern "C" void agt_newline(void)
   else
     iCursorY++;
 
-  if ((bInBox == 0) && (fast_replay == 0))
+  if ((bInBox == 0) && !BATCH_MODE && !fast_replay)
   {
     iScrollCount++;
     if (iScrollCount >= screen_height-2)
@@ -905,10 +908,8 @@ extern "C" void start_interface(fc_type fc)
   CAGiliTyApp* pApp = (CAGiliTyApp*)AfxGetApp();
   ASSERT_VALID(pApp);
 
-  if (stable_random)
-    srand(6);
-  else 
-    srand((unsigned int)time(0));
+  if (!stable_random)
+    iRandomGenerate = (unsigned int)time(0);
 
   if (pApp->m_bFixColumns)
     screen_width = 80;
