@@ -348,6 +348,7 @@ long read_number(void);
 /* --------------------------------------------------------------------	*/
 void init_stack(void);  /* Set up expression stack */
 void clear_stack(void);  /* Set stack back to empty state */
+void reset_random(void);  /* Reset random number generator state */
 int get_random(int a,int b); /* Return random number from a to b, inclusive */
 
 /* --------------------------------------------------------------------	*/
