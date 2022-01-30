@@ -310,4 +310,324 @@ u
 w
 x box
 push it
-signal companions
+hail companions
+w
+s
+look
+concentrate on justice
+x myself
+i
+x curtain
+move it
+s
+get torch
+n
+n
+x chest
+open it
+x coin
+get it
+s
+move curtain
+s
+w
+x cell
+e
+s
+w
+drop torch
+w
+w
+x shovel
+get it
+n
+w
+w
+x sticks
+get it
+se
+se
+se
+s
+x leaves
+get it
+w
+w
+w
+n
+n
+x rope
+take rope
+s
+e
+x fisherman
+talk to him
+buy net
+x it
+w
+sw
+pull branches
+tie rope to willow
+pull rope
+hide
+wait
+wait
+wait
+wait
+ne
+ne
+ne
+e
+e
+n
+get torch
+w
+put nazir in cell
+e
+drop torch
+s
+w
+dig hole
+put sticks in hole
+put leaves on sticks
+hide
+wait
+wait
+wait
+wait
+e
+n
+get torch
+w
+put marion in cell
+e
+drop torch
+s
+w
+climb tree
+wait
+wait
+wait
+wait
+wait
+wait
+wait
+wait
+wait
+drop net
+e
+n
+get torch
+w
+put scarlet in cell
+e
+n
+s
+n
+s
+hit Robin with torch
+hit Robin with torch
+hit Robin with torch
+look
+think about magician
+i
+x floor
+read it
+x post
+x mirror
+x table
+x candle
+x drum
+x box
+x matches
+x jug
+read jug
+x paper
+read it
+take matches
+take jug
+take paper
+light candle
+open jug
+pour liquid on floor
+play drum
+talk to legba
+speak words
+x mirror
+ask legba about mirror
+n
+get basket
+x it
+open it
+look in it
+x mirror
+x blossoms
+list exits
+sw
+get case
+x it
+e
+x building
+s
+x fellow
+x carving
+read writing
+x fountain
+ask legba about ghede
+give case to ghede
+y
+n
+nw
+get weapon
+x it
+n
+w
+x officer
+x painting
+read it
+x monitor
+ask legba about ogoun
+give weapon to officer
+y
+e
+nw
+get orchids
+x it
+ask legba about it
+nw
+nw
+s
+x beauty
+x carpet
+read it
+ask legba about erzulie
+give orchids to beauty
+y
+n
+n
+get dagger
+x it
+read it
+ask legba about dagger
+ask legba about sb
+e
+get sack
+x it
+read it
+open it
+x corn
+ask legba about it
+e
+x hen
+x nest
+give corn to hen
+throw corn
+x nest
+get egg
+x it
+ask legba about egg
+ask legba about damballah
+e
+n
+x serpent
+x pool
+x soil
+read it
+give egg to serpent
+y
+s
+e
+get shell
+x it
+ask legba about shell
+blow shell
+ask legba about agwe
+n
+e
+x drawing
+read it
+x porthole
+x seaman
+give conch to seaman
+y
+w
+n
+n
+n
+n
+n
+x barrier
+read message
+ask legba about barrier
+hit barrier with dagger
+look
+think on wheel
+i
+wait
+wait
+hail cab
+x cabbie
+talk to cabbie
+give dollars to cabbie
+knock on door
+x hilary
+kiss hilary
+x briefcase
+x telephone
+call police
+call fbi
+get briefcase
+open it
+x papers
+x folder
+read folder
+x documents
+read documents
+x david
+x charles
+x smith
+x wesson
+talk to david
+talk to charles
+talk to smith
+ask david about haiti
+ask charles about haiti
+ask smith about haiti
+ask david about fignole
+ask charles about fignole
+ask david about charles
+ask david about fbi
+ask charles about david
+ask charles about fbi
+ask smith about david
+ask smith about charles
+ask david about documents
+ask smith about documents
+ask david about duvalier
+ask charles about duvalier
+ask smith about duvalier
+ask david about michel
+ask charles about michel
+ask smith about michel
+ask david about shibley
+ask charles about shibley
+ask smith about shibley
+ask david about raimone
+ask smith about raimone
+ask david about serumin
+s
+x michel
+talk to michel
+ask michel about haiti
+ask michel about shibley
+ask michel about raimone
+ask michel about duvalier
+ask michel about fignole
+ask michel about documents
+ask michel about fbi
+ask michel about david
+ask michel about charles
+n
+give folder to david
+kiss hilary
+ask hilary about marriage
