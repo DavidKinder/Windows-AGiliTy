@@ -56,11 +56,10 @@ protected:
 public:
   static CAGiliTyView* GetView(void);
   static int GetTextLine(unsigned int* pScreenLine, int iPosition);
-  static void TextOutColour(CDC* pDC, int x, int y, LPCTSTR lpszString, int nCount, COLORREF TextColour, COLORREF BackColour);
   void ResizeWindow(void);
 
-  static const int CharEmphasis;
-  static const int CharStatus;
+  static const unsigned int CharEmphasis;
+  static const unsigned int CharStatus;
 
   CArray<int,int> m_iInput;
 };

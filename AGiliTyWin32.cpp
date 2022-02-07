@@ -115,7 +115,7 @@ void Win32_SetCharacter(int x, int y, char c)
     if ((x >= 0) && (x < screen_width))
     {
       if ((y >= 0) && (y < screen_height))
-        pScreenBuffer[(y*screen_width)+x] = (unsigned int)c | iTextFlags;
+        pScreenBuffer[(y*screen_width)+x] = ((unsigned int)(unsigned char)c) | iTextFlags;
     }
   }
 }
