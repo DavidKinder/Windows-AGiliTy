@@ -82,7 +82,7 @@ BOOL CAGiliTyApp::InitInstance()
   m_LogFont.lfQuality = PROOF_QUALITY;
   m_LogFont.lfPitchAndFamily = DEFAULT_PITCH|FF_DONTCARE;
   strncpy(m_LogFont.lfFaceName,
-    GetProfileString("Display","Font Name","Fixedsys"),LF_FACESIZE);
+    GetProfileString("Display","Font Name",GetDefaultFixedFont()),LF_FACESIZE);
 
   m_bColours = GetProfileInt("Colours","Enabled",TRUE);
   m_TextColour = GetProfileInt("Colours","Text",RGB(0xFF,0xFF,0xFF));
@@ -102,6 +102,14 @@ BOOL CAGiliTyApp::InitInstance()
   m_bFixColumns = GetProfileInt("Window","Fix columns",TRUE);
 
   m_strFilePath =  GetProfileString("Files","File Path","");
+
+  // Are the settings from the latest version?
+  int version = GetProfileInt("Version","Number",0);
+  if (version < 112)
+  {
+    if (strcmp(m_LogFont.lfFaceName,"Fixedsys") == 0)
+      strncpy(m_LogFont.lfFaceName,GetDefaultFixedFont(),LF_FACESIZE);
+  }
 
   // Register document template
   CSingleDocTemplate* pDocTemplate;
@@ -150,6 +158,8 @@ BOOL CAGiliTyApp::InitInstance()
 int CAGiliTyApp::ExitInstance() 
 {
   // Write out settings
+
+  WriteProfileInt("Version","Number",112);
 
   WriteProfileString("Display","Font Name",CString(m_LogFont.lfFaceName));
   WriteProfileInt("Display","Font Size",m_iFontPoints);
@@ -280,6 +290,49 @@ void CAGiliTyApp::OnViewFont()
     }
   }
   bResetCursor = TRUE;
+}
+
+static int CALLBACK EnumFontProc(ENUMLOGFONTEX*, NEWTEXTMETRICEX* ,DWORD, LPARAM found)
+{
+  *((bool*)found) = true;
+  return 0;
+}
+
+CString CAGiliTyApp::GetDefaultFixedFont(void)
+{
+  CString fontName = "Fixedsys";
+
+  // Get a device context for the display
+  CWnd* wnd = CWnd::GetDesktopWindow();
+  CDC* dc = wnd->GetDC();
+
+  // List of fixed width fonts to look for
+  const char* fixedFonts[] =
+  {
+    "Consolas",
+    "Lucida Console",
+    "Courier New"
+  };
+
+  // Search the list of fixed width fonts for a match
+  LOGFONT fontInfo;
+  ::ZeroMemory(&fontInfo,sizeof fontInfo);
+  fontInfo.lfCharSet = DEFAULT_CHARSET;
+  bool found = false;
+  for (int i = 0; i < sizeof fixedFonts / sizeof fixedFonts[0]; i++)
+  {
+    strcpy(fontInfo.lfFaceName,fixedFonts[i]);
+    ::EnumFontFamiliesEx(dc->GetSafeHdc(),&fontInfo,(FONTENUMPROC)EnumFontProc,(LPARAM)&found,0);
+    if (found)
+    {
+      fontName = fontInfo.lfFaceName;
+      break;
+    }
+  }
+
+  // Release the desktop device context
+  wnd->ReleaseDC(dc);
+  return fontName;
 }
 
 COLORREF CAGiliTyApp::GetTextColour(int iColour, BOOL bEmphasis)

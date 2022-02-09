@@ -48,6 +48,8 @@ public:
   DECLARE_MESSAGE_MAP()
 
 public:
+  CString GetDefaultFixedFont(void);
+
   COLORREF GetTextColour(int iColour, BOOL bEmphasis);
   COLORREF GetBackColour(void);
   void GetStatusColours(COLORREF& StatusText, COLORREF& StatusBack);
