@@ -12,8 +12,9 @@ base of common code, so I've decided to merge their porting notes.
 General Public License, version 2. Since this is free software, there
 is NO WARRANTY of any kind.
 
-  The author, Robert Masenten, has not been heard from in some years,
-but bugs can be reported at this project's GitHub page at
+  The original author, Robert Masenten, has not been heard from in years,
+but David Kinder has done some work on updating AGiliTy to fix bugs. Any
+bugs you find can be reported at David's GitHub page for AGiliTy:
     https://github.com/DavidKinder/Windows-AGiliTy/
 
 
