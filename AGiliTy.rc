@@ -156,7 +156,7 @@ BEGIN
     GROUPBOX        "About",IDC_ABOUT_CAPTION,7,2,169,78
     LTEXT           "AGiliTy is released under the terms of the GNU General Public License.",
                     IDC_STATIC,14,58,150,16
-    LTEXT           "Version 1.1.1",IDC_STATIC,14,22,51,8
+    LTEXT           "Version 1.1.2",IDC_STATIC,14,22,51,8
     LTEXT           "Copyright 1996-1999,2001 by Robert Masenten",IDC_STATIC,
                     14,31,159,8
 END
@@ -192,8 +192,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,1,1,0
- PRODUCTVERSION 1,1,1,0
+ FILEVERSION 1,1,2,0
+ PRODUCTVERSION 1,1,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -209,12 +209,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "AGiliTy"
-            VALUE "FileVersion", "1, 1, 1, 0"
+            VALUE "FileVersion", "1, 1, 2, 0"
             VALUE "InternalName", "AGiliTy"
             VALUE "LegalCopyright", "Copyright 1996-1999,2001 by Robert Masenten, David Kinder"
             VALUE "OriginalFilename", "AGiliTy.exe"
             VALUE "ProductName", "AGiliTy AGT Interpreter"
-            VALUE "ProductVersion", "1, 1, 1, 0"
+            VALUE "ProductVersion", "1, 1, 2, 0"
         END
     END
     BLOCK "VarFileInfo"

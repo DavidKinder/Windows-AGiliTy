@@ -1,5 +1,7 @@
 LIST OF CHANGES SINCE VERSION 0.1
 
+CHANGES FOR VERSION 1.1.2
+
 CHANGES FOR VERSION 1.1.1
   --Fixed output function: paragraph filling corrected; made filling
 less agressive for Magx games; fixed print_statline to work with a

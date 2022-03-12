@@ -1,6 +1,6 @@
 =================================================
 AGILITY: THE (MOSTLY) UNIVERSAL AGT INTERPRETER
-Version 1.1.1
+Version 1.1.2
 =================================================
 
   This is an interpreter for game files created with Malmberg and
@@ -59,8 +59,9 @@ list of changes from earlier versions is in 'changes.txt'. (If this is
 with an executable and not the source version, some of these files may not
 be present).
 
-   Send comments and bug reports to Robert Masenten at:
-	rcm-math@pacbell.net
+  The author, Robert Masenten, has not been heard from in some years,
+but bugs can be reported at this project's GitHub page at
+    https://github.com/DavidKinder/Windows-AGiliTy/
 
 
 
