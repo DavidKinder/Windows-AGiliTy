@@ -287,6 +287,8 @@ General options:
   IGNORE_SIZE Ignore weight and size limits on how much the player can
         carry. (There remain limits on the size and weight of any 
         individual object.)
+  STABLE_RANDOM  Use a fixed algorithm for generating random numbers that
+        always produces the same sequence on any system.
 
 Game specific options
   (Many of these are more useful to game authors than game players.)

@@ -34,23 +34,14 @@ in the game file itself)</td>
 (Recommended for most Master's Edition games.)</td>
   </tr>
   <tr>
-    <td nowrap width="180" valign=top>PATH</td>
-    <td>Gives a space-separated search path for AGT games. [Not supported on all platforms.]</td>
-  </tr>
-  <tr>
     <td nowrap width="180" valign=top>TONE</td>
     <td>Enables the *tone* action token, which allows games to make annoying beeps on some platforms.  The only game I might
-recommend enabling this for is <b>CosmoServe</b> which has some interesting sound effects.
-Not all platforms support this command.</td>
-  </tr>
-  <tr>
-    <td nowrap width="180" valign=top>INPUT_BOLD</td>
-    <td>Makes the input line bold. (This doesn't work on all platforms)</td>
+recommend enabling this for is <b>CosmoServe</b> which has some interesting sound effects.</td>
   </tr>
   <tr>
     <td nowrap width="180" valign=top>IBM_CHAR</td>
-    <td>Try to use the IBM character set; don't translate them. If your platform doesn't support the IBM character set, this is
-likely to produce garbage.</td>
+    <td>Try to use the IBM character set; don't translate them. On Windows characters in the IBM set will be mapped to the
+appropriate Unicode characters.</td>
   </tr>
   <tr>
     <td nowrap width="180" valign=top>NO_ERROR</td>
@@ -71,6 +62,10 @@ likely to work or fail together. If you're using this, you'll probably also want
     <td nowrap width="180" valign=top>IGNORE_SIZE</td>
     <td>Ignore weight and size limits on how much the player can carry. (There remain limits on the size and weight of any
 individual object.)</td>
+  </tr>
+  <tr>
+    <td nowrap width="180" valign=top>STABLE_RANDOM</td>
+    <td>Use a fixed algorithm for generating random numbers that always produces the same sequence on any system.</td>
   </tr>
 </table>
 <br>
@@ -136,14 +131,6 @@ you're doing: Magx doesn't assign minimum version numbers without reason.</td>
     <td>Causes LOOK and other end-of-turn actions to take place after AFTER commands. (This is on by default for
 Master's Edition games.)</td>
   </tr>
-  <tr>
-    <td nowrap width="180" valign=top>FIXED_FONT</td>
-    <td>Force system to use a fixed-pitch font.</td>
-  </tr>
-  <tr>
-    <td nowrap width="180" valign=top>NO_FIXED_FONT</td>
-    <td>Allow the system to use proportional fonts.</td>
-  </tr>
 </table>
 <br>
 Technical options: These are fine tuning.<br>
@@ -184,4 +171,3 @@ Parse Options: These are all pretty technical.<br>
 </table>
  </body>
 </html>
-
