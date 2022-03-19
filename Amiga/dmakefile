@@ -1,0 +1,23 @@
+SRC = agil.c agtread.c agxfile.c auxfile.c debugcmd.c disassemble.c \
+      exec.c filename.c gamedata.c interface.c metacommand.c object.c \
+      parser.c runverb.c savegame.c token.c util.c os_amiga.c \
+      agilstub.c agt2agx.c agtout.c
+OBJ = $(SRC:"*.c":"*.o")
+
+all : AGiliTy Agt2Agx AgtOut OpDump
+
+AGiliTy : agil.o agtread.o agxfile.o auxfile.o debugcmd.o disassemble.o \
+          exec.o filename.o gamedata.o interface.o metacommand.o object.o \
+          parser.o runverb.o savegame.o token.o util.o os_amiga.o
+  dcc -mC -mD %(right) -o %(left)
+
+Agt2Agx : agilstub.o agt2agx.o agtread.o agxfile.o auxfile.o filename.o \
+          gamedata.o util.o
+  dcc -mC -mD %(right) -o %(left) 
+
+AgtOut: agilstub.o agtout.o agtread.o agxfile.o auxfile.o disassemble.o \
+        filename.o gamedata.o util.o
+  dcc -mC -mD %(right) -o %(left)
+
+$(OBJ) : $(SRC)
+  dcc -mC -mD -c %(right) -o %(left)
