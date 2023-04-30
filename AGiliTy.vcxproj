@@ -188,6 +188,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Libraries\mfc\ColourButton.cpp" />
+    <ClCompile Include="..\..\Libraries\mfc\DarkMode.cpp" />
     <ClCompile Include="..\..\Libraries\mfc\Dialogs.cpp" />
     <ClCompile Include="..\..\Libraries\mfc\DpiFunctions.cpp" />
     <ClCompile Include="..\..\Libraries\mfc\DSoundEngine.cpp" />
