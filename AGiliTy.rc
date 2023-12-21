@@ -171,10 +171,10 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,108,103,50,14
     GROUPBOX        "Window",IDC_STATIC_WINDOW,7,3,151,29
     CONTROL         "&Fix window at 80 columns",IDC_SIZE_WINDOW,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,34,16,96,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,34,16,110,8
     GROUPBOX        "Colour",IDC_STATIC_COLOUR,7,35,151,61
     CONTROL         "&Enable colours",IDC_COLOURS,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,61,45,63,9
+                    WS_TABSTOP,61,45,70,9
     RTEXT           "&Text",IDCS_TEXT,26,61,17,8
     PUSHBUTTON      "",IDC_TEXT,47,59,27,13
     RTEXT           "&Background",IDCS_BACK,78,61,40,8

@@ -111,6 +111,10 @@ BOOL CAGiliTyApp::InitInstance()
       strncpy(m_LogFont.lfFaceName,GetDefaultFixedFont(),LF_FACESIZE);
   }
 
+  // Turn on dark mode for the application, if necessary
+  if (DarkMode::IsEnabled(DARKMODE_REGISTRY))
+    DarkMode::SetAppDarkMode();
+
   // Register document template
   CSingleDocTemplate* pDocTemplate;
   pDocTemplate = new CSingleDocTemplate(
@@ -441,9 +445,31 @@ void CAGiliTyApp::GetStatusColours(COLORREF& StatusText, COLORREF& StatusBack)
   }
 }
 
+class CAboutDlg : public BaseDialog
+{
+public:
+  CAboutDlg(CWnd* parent = NULL) : BaseDialog(IDD_ABOUTBOX,parent)
+  {
+  }
+
+protected:
+  BOOL OnInitDialog()
+  {
+    if (!BaseDialog::OnInitDialog())
+      return FALSE;
+
+    m_OK.SubclassDlgItem(IDOK,this);
+    m_AboutGroup.SubclassDlgItem(IDC_ABOUT_CAPTION,this);
+    return TRUE;
+  }
+
+  DarkModeButton m_OK;
+  DarkModeGroupBox m_AboutGroup;
+};
+
 void CAGiliTyApp::OnAppAbout()
 {
-  BaseDialog aboutDlg(IDD_ABOUTBOX);
+  CAboutDlg aboutDlg(AfxGetMainWnd());
   aboutDlg.DoModal();
   bResetCursor = TRUE;
 }

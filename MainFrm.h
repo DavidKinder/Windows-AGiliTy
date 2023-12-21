@@ -13,6 +13,8 @@
 
 #include "MenuBar.h"
 
+#define DARKMODE_REGISTRY "Software\\David Kinder\\AGiliTy"
+
 class CMainFrame : public MenuBarFrameWnd
 {
 protected: // create from serialization only
@@ -42,7 +44,7 @@ public:
 #endif
 
 protected:  // control bar embedded members
-  CStatusBar m_statusBar;
+  DarkModeStatusBar m_statusBar;
 
 // Generated message map functions
 protected:

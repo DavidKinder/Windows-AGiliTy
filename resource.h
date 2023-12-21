@@ -6,7 +6,8 @@
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
 #define IDR_TOOLBAR                     129
-#define IDD_OPTIONS                     130
+#define IDR_DARK_CHECK                  130
+#define IDD_OPTIONS                     140
 #define IDC_COLOURS                     1000
 #define IDCS_TEXT                       1002
 #define IDCS_EMPHASIS                   1003
@@ -31,7 +32,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        131
+#define _APS_NEXT_RESOURCE_VALUE        141
 #define _APS_NEXT_COMMAND_VALUE         32782
 #define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           101

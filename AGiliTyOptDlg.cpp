@@ -32,7 +32,6 @@ void COptionsDlg::DoDataExchange(CDataExchange* pDX)
 {
   BaseDialog::DoDataExchange(pDX);
   //{{AFX_DATA_MAP(COptionsDlg)
-  DDX_Control(pDX, IDC_COLOURS, m_Colours);
   DDX_Check(pDX, IDC_SIZE_WINDOW, m_bFixColumns);
   //}}AFX_DATA_MAP
 }
@@ -47,15 +46,28 @@ END_MESSAGE_MAP()
 
 BOOL COptionsDlg::OnInitDialog() 
 {
-  BaseDialog::OnInitDialog();
+  if (!BaseDialog::OnInitDialog())
+    return FALSE;
   
-  m_Colours.SetCheck(m_bColours);
-
   // Subclass the colour buttons
   m_Text.SubclassDlgItem(IDC_TEXT,this);
   m_Back.SubclassDlgItem(IDC_BACK,this);
   m_Emphasis.SubclassDlgItem(IDC_EMPHASIS,this);
   m_Status.SubclassDlgItem(IDC_STATUS,this);
+
+  // Subclass the controls for dark mode
+  m_WindowGroup.SubclassDlgItem(IDC_STATIC_WINDOW,this);
+  m_ColourGroup.SubclassDlgItem(IDC_STATIC_COLOUR,this);
+  m_SizeCheck.SubclassDlgItem(IDC_SIZE_WINDOW,this,IDR_DARK_CHECK);
+  m_ColoursCheck.SubclassDlgItem(IDC_COLOURS,this,IDR_DARK_CHECK);
+  m_TextLabel.SubclassDlgItem(IDCS_TEXT,this);
+  m_BackLabel.SubclassDlgItem(IDCS_BACK,this);
+  m_EmphasisLabel.SubclassDlgItem(IDCS_EMPHASIS,this);
+  m_StatusLabel.SubclassDlgItem(IDCS_STATUS,this);
+  m_OK.SubclassDlgItem(IDOK,this);
+  m_Cancel.SubclassDlgItem(IDCANCEL,this);
+
+  m_ColoursCheck.SetCheck(m_bColours);
   SetColBtnState();
 
   // Set up context sensitive help
@@ -73,7 +85,7 @@ BOOL COptionsDlg::OnInitDialog()
 
 void COptionsDlg::OnDestroy() 
 {
-  m_bColours = m_Colours.GetCheck();
+  m_bColours = m_ColoursCheck.GetCheck();
   BaseDialog::OnDestroy();
 }
 
@@ -151,15 +163,15 @@ void COptionsDlg::OnColoursOnOff()
 
 void COptionsDlg::SetColBtnState(void)
 {
-  BOOL bEnabled = m_Colours.GetCheck();
+  BOOL bEnabled = m_ColoursCheck.GetCheck();
 
   m_Text.EnableWindow(bEnabled);
   m_Back.EnableWindow(bEnabled);
   m_Emphasis.EnableWindow(bEnabled);
   m_Status.EnableWindow(bEnabled);
 
-  GetDlgItem(IDCS_TEXT)->EnableWindow(bEnabled);
-  GetDlgItem(IDCS_BACK)->EnableWindow(bEnabled);
-  GetDlgItem(IDCS_EMPHASIS)->EnableWindow(bEnabled);
-  GetDlgItem(IDCS_STATUS)->EnableWindow(bEnabled);
+  m_TextLabel.EnableWindow(bEnabled);
+  m_BackLabel.EnableWindow(bEnabled);
+  m_EmphasisLabel.EnableWindow(bEnabled);
+  m_StatusLabel.EnableWindow(bEnabled);
 }

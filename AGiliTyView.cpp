@@ -11,6 +11,8 @@
 #include "AGiliTy.h"
 #include "AGiliTyDoc.h"
 #include "AGiliTyView.h"
+
+#include "DarkMode.h"
 #include "DpiFunctions.h"
 
 extern "C" {
@@ -44,6 +46,7 @@ BEGIN_MESSAGE_MAP(CAGiliTyView, CView)
   ON_WM_KEYDOWN()
   ON_WM_SIZE()
   ON_WM_ERASEBKGND()
+  ON_WM_NCPAINT()
   ON_WM_KILLFOCUS()
   ON_WM_SETFOCUS()
   //}}AFX_MSG_MAP
@@ -308,6 +311,20 @@ void CAGiliTyView::ResizeWindow(void)
 BOOL CAGiliTyView::OnEraseBkgnd(CDC* pDC) 
 {
   return 1;
+}
+
+void CAGiliTyView::OnNcPaint()
+{
+  DarkMode* dark = DarkMode::GetActive(this);
+  if (dark)
+  {
+    CWindowDC dc(this);
+    CRect r = dark->PrepareNonClientBorder(this,dc);
+    dc.FillSolidRect(r,dark->GetColour(DarkMode::Dark3));
+    dc.SelectClipRgn(NULL);
+  }
+  else
+    Default();
 }
 
 void CAGiliTyView::OnKillFocus(CWnd* pNewWnd)

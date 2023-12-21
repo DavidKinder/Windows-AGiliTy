@@ -12,6 +12,7 @@
 #endif // _MSC_VER >= 1000
 
 #include "ColourButton.h"
+#include "DarkMode.h"
 #include "Dialogs.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -27,7 +28,6 @@ public:
 // Dialog Data
   //{{AFX_DATA(COptionsDlg)
   enum { IDD = IDD_OPTIONS };
-  CButton  m_Colours;
   BOOL  m_bFixColumns;
   //}}AFX_DATA
 
@@ -60,5 +60,9 @@ protected:
   void SetColBtnState(void);
 
   BOOL m_bColours;
+  DarkModeGroupBox m_WindowGroup, m_ColourGroup;
+  DarkModeCheckButton m_SizeCheck, m_ColoursCheck;
+  DarkModeStatic m_TextLabel, m_BackLabel, m_EmphasisLabel, m_StatusLabel;
   ColourButton m_Text, m_Back, m_Emphasis, m_Status;
+  DarkModeButton m_OK, m_Cancel;
 };
