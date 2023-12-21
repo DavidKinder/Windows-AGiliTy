@@ -21,7 +21,7 @@ static char THIS_FILE[] = __FILE__;
 // COptionsDlg dialog
 /////////////////////////////////////////////////////////////////////////////
 
-COptionsDlg::COptionsDlg(CWnd* pParent) : BaseDialog(COptionsDlg::IDD, pParent)
+COptionsDlg::COptionsDlg(CWnd* pParent) : CAGiliTyDlg(COptionsDlg::IDD, pParent)
 {
   //{{AFX_DATA_INIT(COptionsDlg)
   m_bFixColumns = FALSE;
@@ -30,13 +30,13 @@ COptionsDlg::COptionsDlg(CWnd* pParent) : BaseDialog(COptionsDlg::IDD, pParent)
 
 void COptionsDlg::DoDataExchange(CDataExchange* pDX)
 {
-  BaseDialog::DoDataExchange(pDX);
+  CAGiliTyDlg::DoDataExchange(pDX);
   //{{AFX_DATA_MAP(COptionsDlg)
   DDX_Check(pDX, IDC_SIZE_WINDOW, m_bFixColumns);
   //}}AFX_DATA_MAP
 }
 
-BEGIN_MESSAGE_MAP(COptionsDlg, BaseDialog)
+BEGIN_MESSAGE_MAP(COptionsDlg, CAGiliTyDlg)
   //{{AFX_MSG_MAP(COptionsDlg)
   ON_BN_CLICKED(IDC_COLOURS, OnColoursOnOff)
   ON_WM_DESTROY()
@@ -46,7 +46,7 @@ END_MESSAGE_MAP()
 
 BOOL COptionsDlg::OnInitDialog() 
 {
-  if (!BaseDialog::OnInitDialog())
+  if (!CAGiliTyDlg::OnInitDialog())
     return FALSE;
   
   // Subclass the colour buttons
@@ -86,7 +86,7 @@ BOOL COptionsDlg::OnInitDialog()
 void COptionsDlg::OnDestroy() 
 {
   m_bColours = m_ColoursCheck.GetCheck();
-  BaseDialog::OnDestroy();
+  CAGiliTyDlg::OnDestroy();
 }
 
 int COptionsDlg::DoOptionsModal(BOOL& bEnabled,
@@ -101,7 +101,7 @@ int COptionsDlg::DoOptionsModal(BOOL& bEnabled,
   m_Status.SetCurrentColour(StatusColour);
   m_bFixColumns = bFixColumns;
 
-  int iStatus = BaseDialog::DoModal();
+  int iStatus = CAGiliTyDlg::DoModal();
   if (iStatus == IDOK)
   {
     bEnabled = m_bColours;

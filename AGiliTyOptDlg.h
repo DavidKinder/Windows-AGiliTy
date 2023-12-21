@@ -11,6 +11,7 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
+#include "AGiliTyDlg.h"
 #include "ColourButton.h"
 #include "DarkMode.h"
 #include "Dialogs.h"
@@ -19,7 +20,7 @@
 // COptionsDlg dialog
 /////////////////////////////////////////////////////////////////////////////
 
-class COptionsDlg : public BaseDialog
+class COptionsDlg : public CAGiliTyDlg
 {
 // Construction
 public:

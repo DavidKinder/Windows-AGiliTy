@@ -9,6 +9,7 @@
 
 #include "StdAfx.h"
 #include "AGiliTy.h"
+#include "AGiliTyDlg.h"
 #include "AGiliTyDoc.h"
 #include "AGiliTyOptDlg.h"
 #include "AGiliTyView.h"
@@ -266,7 +267,7 @@ void CAGiliTyApp::OnFileOpen()
 
 void CAGiliTyApp::OnViewOptions() 
 {
-  COptionsDlg Dialog;
+  COptionsDlg Dialog(AfxGetMainWnd());
   if (Dialog.DoOptionsModal(m_bColours,
     m_TextColour,m_BackColour,
     m_EmphasisColour,m_StatusColour,
@@ -445,17 +446,17 @@ void CAGiliTyApp::GetStatusColours(COLORREF& StatusText, COLORREF& StatusBack)
   }
 }
 
-class CAboutDlg : public BaseDialog
+class CAboutDlg : public CAGiliTyDlg
 {
 public:
-  CAboutDlg(CWnd* parent = NULL) : BaseDialog(IDD_ABOUTBOX,parent)
+  CAboutDlg(CWnd* parent = NULL) : CAGiliTyDlg(IDD_ABOUTBOX,parent)
   {
   }
 
 protected:
   BOOL OnInitDialog()
   {
-    if (!BaseDialog::OnInitDialog())
+    if (!CAGiliTyDlg::OnInitDialog())
       return FALSE;
 
     m_OK.SubclassDlgItem(IDOK,this);

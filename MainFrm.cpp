@@ -9,6 +9,7 @@
 
 #include "StdAfx.h"
 #include "AGiliTy.h"
+#include "AGiliTyDlg.h"
 #include "MainFrm.h"
 #include "DpiFunctions.h"
 
@@ -29,6 +30,7 @@ IMPLEMENT_DYNCREATE(CMainFrame, MenuBarFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, MenuBarFrameWnd)
   //{{AFX_MSG_MAP(CMainFrame)
   ON_WM_CREATE()
+  ON_WM_SETTINGCHANGE()
   ON_COMMAND(ID_HELP_HELPTOPICS, OnHelp)
   //}}AFX_MSG_MAP
   ON_MESSAGE(WM_DPICHANGED, OnDpiChanged)
@@ -42,12 +44,17 @@ static UINT indicators[] =
   ID_INDICATOR_SCRL,
 };
 
-CMainFrame::CMainFrame() : m_dpi(96)
+CMainFrame::CMainFrame() : m_dpi(96), m_modalDialog(NULL)
 {
 }
 
 CMainFrame::~CMainFrame()
 {
+}
+
+void CMainFrame::SetModalDialog(CWnd* dialog)
+{
+  m_modalDialog = dialog;
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -119,6 +126,24 @@ BOOL CMainFrame::DestroyWindow()
 void CMainFrame::OnHelp() 
 {
   HtmlHelp(0,HH_HELP_FINDER);
+}
+
+void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
+{
+  MenuBarFrameWnd::OnSettingChange(uFlags,lpszSection);
+
+  if ((m_dark != NULL) != DarkMode::IsEnabled(DARKMODE_REGISTRY))
+  {
+    SetDarkMode(DarkMode::GetEnabled(DARKMODE_REGISTRY));
+    if (m_modalDialog != NULL)
+    {
+      if (m_modalDialog->IsKindOf(RUNTIME_CLASS(CAGiliTyDlg)))
+        ((CAGiliTyDlg*)m_modalDialog)->SetDarkMode(DarkMode::GetActive(m_modalDialog));
+    }
+
+    if (m_dark != NULL)
+      DarkMode::SetAppDarkMode();
+  }
 }
 
 LRESULT CMainFrame::OnDpiChanged(WPARAM wparam, LPARAM lparam)

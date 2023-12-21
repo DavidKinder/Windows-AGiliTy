@@ -180,6 +180,9 @@
     <ClCompile Include="..\..\Libraries\mfc\DarkMode.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="AGiliTyDlg.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\AGiliTy.rc2">

@@ -246,6 +246,7 @@
     <ClCompile Include="AGiliTy.cpp">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level2</WarningLevel>
     </ClCompile>
+    <ClCompile Include="AGiliTyDlg.cpp" />
     <ClCompile Include="AGiliTyDoc.cpp">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level2</WarningLevel>
     </ClCompile>
