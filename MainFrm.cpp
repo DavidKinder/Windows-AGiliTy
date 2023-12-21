@@ -141,8 +141,7 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
         ((CAGiliTyDlg*)m_modalDialog)->SetDarkMode(DarkMode::GetActive(m_modalDialog));
     }
 
-    if (m_dark != NULL)
-      DarkMode::SetAppDarkMode();
+    DarkMode::SetAppDarkMode(m_dark);
   }
 }
 
